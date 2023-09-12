@@ -1,0 +1,936 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: 481px and Up Stylesheet
+
+This stylesheet is loaded for larger devices. It's set to
+481px because at 480px it would load on a landscaped iPhone.
+This isn't ideal because then you would be loading all those
+extra styles on that same mobile connection.
+
+A word of warning. This size COULD be a larger mobile device,
+so you still want to keep it pretty light and simply expand
+upon your base.scss styles.
+
+******************************************************************/
+
+/*
+IMPORTANT NOTE ABOUT SASS 3.3 & UP
+You can't use @extend within media queries
+anymore, so just be aware that if you drop
+them in here, they won't work.
+*/
+/*********************
+LAYOUT & GRID STYLES
+*********************/
+
+.wrap {
+	//width: 760px;
+}
+
+.sp {
+	display: block;
+}
+
+.pc {
+	display: none;
+}
+
+/*********************
+NAVIGATION STYLES
+*********************/
+
+.nav {}
+
+/* .menu is clearfixed inside mixins.scss */
+.menu {
+	ul {
+		li {
+			a {
+
+				/*
+					you can use hover styles here even though this size
+					has the possibility of being a mobile device.
+					*/
+				&:hover,
+				&:focus {}
+			}
+
+			&:first-child {}
+
+			&:last-child {}
+
+			/*
+				plan your menus and drop-downs wisely.
+				*/
+			ul.sub-menu,
+			ul.children {
+				li {
+					a {
+
+						&:hover,
+						&:focus {}
+
+						&:link {}
+					}
+
+					&:first-child {}
+
+					&:last-child {}
+				}
+			}
+		}
+
+		/* end .menu ul li */
+
+		/* highlight current page */
+		li.current-menu-item,
+		li.current_page_item,
+		li.current_page_ancestor {
+			a {}
+		}
+
+		/* end current highlighters */
+	}
+
+	/* end .menu ul */
+}
+
+/* end .menu */
+
+.pagination {
+	padding-top: $mg;
+	font-size: 0;
+	margin: $mg*3 0 0;
+
+	ul {}
+
+	li {}
+
+	a,
+	span {
+		font-weight: $reg;
+	}
+}
+
+
+/******************************************************************
+H1, H2, H3, H4, H5 STYLES
+******************************************************************/
+.section-title {
+	margin-bottom: $mg*2;
+	line-height: 1.2;
+}
+
+.page-title-area {
+	margin-bottom: $mg*4;
+}
+
+.page-title {
+	@include fs-h4;
+
+	span {
+		@include fs-smallest-text;
+	}
+}
+
+/*********************
+BREADCRUMBS STYLES
+*********************/
+.breadcrumbs_wrap {
+	background: rgba($light-gray, $pure);
+
+	&+.ad {
+		margin-top: 0;
+		border-top: none;
+	}
+}
+
+
+/*********************
+POSTS & CONTENT STYLES
+*********************/
+
+/* entry content */
+.entry-content {
+
+
+	h1 {}
+
+	h2 {
+		@include fs-sp-h2;
+	}
+
+	h3 {
+		@include fs-sp-h3;
+	}
+
+	h4 {
+		@include fs-sp-h4;
+	}
+
+	h5 {
+		@include fs-sp-h5;
+	}
+
+	h6 {
+		@include fs-sp-h6;
+	}
+
+	/* at this larger size, we can start to align images */
+	img.alignleft {
+		margin-right: 1.5em;
+		display: inline;
+		float: left;
+	}
+
+	img.alignright {
+		margin-left: 1.5em;
+		display: inline;
+		float: right;
+	}
+
+	.aligncenter,
+	img.aligncenter {
+		margin-right: auto;
+		margin-left: auto;
+		display: block;
+		clear: both;
+	}
+
+	.wp-block-buttons {
+		flex-wrap: wrap;
+	}
+
+	.wp-block-image {
+
+		.aligncenter>figcaption,
+		.alignleft>figcaption,
+		.alignright>figcaption,
+		&.is-resized>figcaption {
+			display: inline-block;
+		}
+	}
+
+	.wp-block-columns {
+		.wp-block-column {
+			&+.wp-block-column {
+				margin-top: $mg*2;
+			}
+		}
+	}
+
+	.wp-block-buttons {
+
+		.wp-block-button,
+		.wp-block-button__link {
+			max-width: 100%;
+			width: 100%;
+		}
+	}
+
+}
+
+/* end .entry-content */
+
+
+.single-title-area {
+	.titles {
+		.entry-title {
+			@include fs-17chara;
+		}
+	}
+}
+
+.magazine {
+	.entry-content {
+		h1 {
+			@include fs-h3;
+		}
+
+		h2,
+		h3 {
+			@include fs-h5;
+			text-align: left;
+		}
+
+		.mia {
+			flex-direction: column;
+
+			.img,
+			.txt {
+				width: 100%;
+			}
+
+			.img {
+				margin: 0 auto $mg*3;
+
+				figure {}
+			}
+
+			.txt {
+				margin: 0;
+
+				.btn-list {
+					li {
+						.btn {
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.special-content-list {
+	.hentry {
+		flex-direction: column;
+		padding: 0 $mg*3 $mg*3;
+
+		.img,
+		.titles {
+			width: 100%;
+			margin: 0;
+		}
+
+		.titles {
+			.entry-title {
+				@include fs-sp-h4;
+			}
+
+			.the_excerpt {
+				margin-bottom: $mg*2;
+			}
+
+			.the_excerpt p {
+				@include fs-small-text;
+				height: 2.25rem;
+				overflow: hidden;
+				position: relative;
+
+				&:after {
+					display: block;
+					content: "";
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					width: 100%;
+					height: 80%;
+					background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+					z-index: 1;
+				}
+			}
+
+			.meta {
+				line-height: 1.2;
+
+				time,
+				ul,
+				li {
+					@include fs-hint-text;
+				}
+			}
+		}
+
+		.img {
+			margin-bottom: $mg*2;
+			width: calc(100% + $mg*6);
+			margin-left: -$mg*3;
+			margin-right: -$mg*3;
+		}
+	}
+}
+
+
+/*********************
+FOOTER STYLES
+*********************/
+.footer {
+	.gm-area {
+		.wrap {
+			width: 100%;
+			padding: $mg*4 0 0;
+		}
+
+		.gm_logo {
+			width: 10rem;
+		}
+	}
+
+	.os-area,
+	.com-area {
+		.wrap {
+			padding-top: $mg*4;
+			padding-bottom: $mg*4;
+		}
+
+		.other-links {
+			width: 100%;
+			gap: $mg;
+			justify-content: space-between;
+
+			li {
+				margin: 0;
+				width: calc(25% - $mg);
+
+				&:nth-child(4) {
+					margin: 0;
+				}
+			}
+		}
+	}
+
+	.com-area {
+		.wrap {
+			padding-top: $mg*2;
+			padding-bottom: $mg*2;
+		}
+
+		.footer-nav {
+			width: 100%;
+			flex-wrap: wrap;
+
+			li a {
+				@include fs-smallest-text;
+			}
+		}
+	}
+
+
+	.sns {
+		margin-top: $mg*2;
+		margin-bottom: $mg*2;
+		gap: $mg;
+
+		li {
+			margin-right: 0;
+		}
+	}
+
+	nav {
+		.footer-nav {
+			display: flex;
+			text-align: center;
+			width: calc(100% - $mg*6);
+			margin-right: auto;
+			margin-left: auto;
+			flex-wrap: wrap;
+			word-wrap: break-word;
+			gap: $mg;
+
+			li {
+				@include fs-smallest-text;
+				margin-right: 0;
+				line-height: 1;
+
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+
+	#menu-footer_tags {
+		width: 100%;
+		display: block;
+		border-top: 1px solid $border-color;
+
+		li {
+			box-sizing: border-box;
+			width: 100%;
+			margin: 0;
+			padding: $mg;
+			border-bottom: 1px solid $border-color;
+			line-height: 1.2;
+
+			&:last-child {
+				border: none;
+			}
+		}
+	}
+}
+
+.copyright {
+	@include fs-hint-text;
+}
+
+
+/*
+check your menus here. do they look good?
+do they need tweaking?
+*/
+.footer-links {
+	ul {
+		li {}
+	}
+}
+
+/* end .footer-links */
+
+
+/*********************
+TOP PAGE
+*********************/
+
+
+/* POWER PUSH */
+.ppa,
+.spa {
+
+	.titles {
+
+		width: 100%;
+		padding: $mg*3 $mg*2;
+		margin: 0;
+		position: relative;
+
+
+		.in-b {
+			display: none;
+		}
+
+		.entry-title {
+			margin: 0 0 $mg;
+			letter-spacing: normal;
+			@include fs-article-list;
+		}
+
+		.the_excerpt {
+			@include fs-smaller-text;
+			line-height: 1.4;
+			position: relative;
+			overflow: hidden;
+			height: 3rem;
+			margin: 0;
+
+			.gradient {
+				display: block;
+				height: 80%;
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+			}
+		}
+
+		.genre {
+			display: none;
+		}
+	}
+
+	&:first-of-type .titles .entry-title {
+		@include fs-sp-h3
+	}
+}
+
+/* PICK UP */
+// .articles-wrap-pu {
+// 	display: block;
+
+// 	article {
+// 		width: 100%;
+// 		margin: 0 0 $mg*2 0;
+
+// 		&:last-child {
+// 			margin-bottom: 0;
+// 		}
+// 	}
+// }
+.articles-wrap-pu,
+.articles-wrap-lt {
+	flex-wrap: wrap;
+	gap: $mg*2;
+
+	article {
+		width: 100%;
+	}
+}
+
+/* PLAY LIST */
+.playlist-carousel {
+	.owl-nav {
+		text-align: center;
+		top: auto;
+		left: 50%;
+		transform: translate(-50%, 0);
+	}
+}
+
+/* SPECIAL */
+.special-articles-wrap {}
+
+.special-articles-wrap-inner {
+	flex-direction: column;
+	padding-bottom: $mg*6;
+	gap: $mg*2;
+}
+
+.spa {
+	flex-direction: row;
+	width: 100%;
+	gap: $mg*2;
+
+	.titles {
+		padding: 0;
+	}
+
+	.img {
+		padding-top: 25%;
+	}
+
+	&:first-of-type {
+		margin-bottom: $mg*2;
+		padding-bottom: $mg*2;
+
+		.titles {
+			.entry-title {
+				margin: $mg*2 0;
+
+			}
+
+			.the_excerpt {
+				height: auto;
+
+				p {
+					margin: 0;
+				}
+			}
+
+			ul.genre {
+				display: none;
+			}
+
+		}
+
+		.btn {
+			display: none;
+		}
+	}
+}
+
+/* MAGAZINE */
+.mga {
+	padding-top: $mg*4;
+
+	&:first-of-type {
+		border-bottom: none;
+
+		.img {
+			width: 100%;
+			max-width: 100%;
+
+			img {
+				max-height: 100%;
+				width: 100%;
+			}
+		}
+
+		.btn {
+			display: block;
+		}
+
+		.titles {
+			width: 100%;
+
+			h3 {
+				@include fs-hint-text;
+				margin: 0;
+			}
+
+			.entry-title {
+				@include fs-body-text;
+				line-height: 1.4;
+				margin: $mg 0 $mg*2;
+			}
+
+			.detail-list,
+			.the_excerpt {
+				display: none;
+			}
+
+			.btn-area {
+				margin-top: $mg*3;
+
+				.btn {
+					width: 100%;
+					display: inline-block;
+					margin: 0;
+					min-width: 0;
+				}
+
+				#mg-btn.pc {
+					display: none;
+				}
+			}
+		}
+
+		.btn-list {
+			display: none;
+		}
+	}
+}
+
+
+//指板図くん
+#shibanzu-area {
+	.banners {
+		flex-direction: column;
+
+		.imgwrap {
+			margin: 0 0 $mg*2;
+
+			&:last-child {
+				margin: 0;
+			}
+		}
+	}
+}
+
+
+//ARCHIVES
+.und-wrap {
+	margin: $mg*4 auto;
+}
+
+.articles-wrap {
+
+	.hentry {
+		.titles {
+
+			time,
+			ul,
+			li {
+				@include fs-hint-text;
+			}
+		}
+	}
+}
+
+.articles-wrap-4,
+.articles-wrap-main,
+.articles-wrap-pu,
+.archive-wrap,
+.articles-wrap-lt {
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: $mg*2;
+
+
+	article {
+		width: 100%;
+		margin-right: 0;
+		display: flex;
+
+		&:nth-child(2n) {
+			margin-right: 0;
+		}
+
+		.img {
+			padding-top: 0;
+			padding-right: $mg;
+
+			a {
+				display: block;
+				position: relative;
+				padding-top: 50%;
+
+			}
+		}
+
+		.entry-title {
+			@include fs-article-list;
+			margin: $mg 0 0;
+
+		}
+
+		.titles {
+			//margin-top: -0.35rem;
+			font-size: 0;
+			line-height: 1.5;
+
+			time {}
+
+			.genre {
+				display: none;
+			}
+		}
+	}
+}
+
+.articles-wrap-pu,
+.articles-wrap-lt {
+	article {
+		margin: 0;
+	}
+}
+
+
+.articles-wrap-main {
+	margin-bottom: $mg*2;
+
+	article {
+		&:first-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.articles-wrap-pl {
+	max-width: calc(100% + $mg*7);
+	width: calc(100% + $mg*7);
+	margin-left: -$mg*4;
+	margin-right: -$mg*3;
+
+	article {
+		display: block;
+		margin: 0;
+
+		.img {
+			padding: 0;
+			margin-bottom: $mg/2;
+
+			a {
+				padding-top: 100%;
+			}
+		}
+
+		.titles {
+
+			time,
+			.cat {
+				display: none;
+			}
+
+			.entry-title {}
+		}
+	}
+}
+
+.articles-wrap-pl2 {
+	max-width: calc(100% + $mg*10);
+	width: calc(100% + $mg*10);
+	margin-left: -$mg*7;
+	margin-right: -$mg*3;
+}
+
+
+.archive-wrap {
+	.inl {
+		flex-direction: column;
+
+		article {
+			width: 100%;
+			margin: 0 0 $mg*2;
+
+			&:last-of-type {
+				margin: 0;
+			}
+
+			&:first-child {
+				flex-direction: column;
+				margin-bottom: $mg*3;
+
+				.img {
+					margin: 0 0 $mg;
+					padding: 0;
+				}
+			}
+		}
+	}
+}
+
+
+.children-list {
+	margin: $mg*3 0;
+	line-height: 1;
+	overflow-x: scroll;
+	white-space: nowrap;
+	padding: $mg;
+	background: $light-gray;
+	border-radius: 2px;
+
+	li {
+		@include fs-smaller-text;
+		display: inline-block;
+		font-weight: $reg;
+		margin: 0 $mg 0 0;
+
+		&:last-child {
+			margin: 0;
+		}
+
+		a {
+			border-bottom: 1px solid $black;
+		}
+	}
+
+	i {
+		display: none;
+	}
+}
+
+/******************************************************************
+TOP PAGE STYLES
+******************************************************************/
+.top-contents {
+	margin: $mg*4 auto;
+
+	&+.ad,
+	&+.top-contents {
+		margin-top: 0;
+	}
+
+	.contain-categories {
+		margin: 0 0 $mg*4;
+		flex-direction: column;
+
+
+		p {
+			margin: 0;
+		}
+
+		ul {
+			overflow-x: scroll;
+			white-space: nowrap;
+			padding: $mg;
+			margin: $mg/2 0 0;
+			background: $light-gray;
+			border-radius: 2px;
+
+			&:before {
+				display: none;
+			}
+
+			li {
+				display: inline-block;
+
+				a {
+					border-bottom: 1px solid $black;
+				}
+
+			}
+		}
+	}
+}
+
+#pick-up {
+	margin: $mg*4 0;
+
+	.wrap {
+		padding-top: $mg*4;
+		padding-bottom: $mg*4;
+	}
+}
+
+#playlist {
+	.wrap {
+		padding-top: $mg*4;
+		padding-bottom: $mg*4;
+	}
+}
+
+.ad {
+	padding: $mg*4 0;
+}

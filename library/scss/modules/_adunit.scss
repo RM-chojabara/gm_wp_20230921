@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+.ad > .wrap {
+        padding: 0;
+}
+
+.adblock-pc > div, .adblock-sp > div {
+        border: 1px solid #666;
+        margin: 0 auto;
+        max-width: 728px;
+}
+
+@media only screen and (min-width: 768px) {
+        .adblock-pc {display: block;}
+        .adblock-sp {display: none;}
+}
+@media only screen and (max-width: 767px) {
+        .adblock-pc {display: none;}
+        .adblock-sp {display: block;}
+}
+
+
+/*sidebar - AdArea05,06,07 */
+.ads > .ad {
+        border: none;
+        padding: 0;
+}

@@ -1,0 +1,124 @@
+@charset 'UTF-8';
+
+.piano-register__lp-block {
+  margin-bottom: 60px;
+
+  @media screen and (max-width: 786px) {
+
+  }
+
+  .piano-register__lp-inner {
+
+    @media screen and (max-width: 786px) {
+
+    }
+  }
+
+  .piano-register__lp-main {
+
+    @media screen and (max-width: 786px) {
+
+    }
+  }
+
+  .piano-register__lp-main-inner {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    @media screen and (max-width: 786px) {
+
+    }
+  }
+
+
+  .piano-register__lp-main-box {
+    width: 100%;
+  }
+
+
+
+  .piano-register__lp-card {
+    width: calc((100% - 40px) / 3 );
+    min-width: 280px;
+    max-width: 320px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+    box-shadow: 4px 2px 13px -5px #777777;
+
+    @media screen and (max-width: 786px) {
+      width: 100%;
+      max-width: 480px;
+      margin-right: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .piano-register__lp-card-header {
+    background-color: #000;
+    text-align: center;
+
+    @media screen and (max-width: 786px) {
+
+    }
+  }
+
+  .piano-register__lp-card-title {
+    color: #fff;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0;
+
+    @media screen and (max-width: 786px) {
+
+    }
+  }
+
+  .piano-register__lp-body {
+    padding: 2.5rem 1.2rem;
+
+    @media screen and (max-width: 786px) {
+
+    }
+  }
+
+  .piano-register__lp-price {
+    margin: 0;
+    margin-bottom: 2.5rem;
+    font-size: 32px;
+    text-align: center;
+
+    @media screen and (max-width: 786px) {
+
+    }
+
+    & span {
+      font-size: 14px;
+    }
+  }
+
+  .piano-register__lp-detail {
+
+    @media screen and (max-width: 786px) {
+
+    }
+  }
+
+  .piano-register__lp-button {
+    display: block;
+    width: 100%;
+    max-width: 245px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+  }
+}

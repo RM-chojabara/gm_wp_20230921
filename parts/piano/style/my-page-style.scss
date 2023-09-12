@@ -1,0 +1,46 @@
+@charset 'UTF-8';
+
+/***********************
+  マイページスタイル
+************************/
+
+
+.piano-my-page {
+  .piano-my-page__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+    padding-right: 0;
+
+    @media screen and (max-width: 786px) {
+      justify-content: center;
+      margin-bottom: 0;
+      padding-bottom: 0;
+      padding-top: 3.4rem;
+    }
+
+    .page-title {
+
+      @media screen and (max-width: 786px) {
+        width: 100%;
+        margin-bottom: 1.8rem;
+      }
+    }
+  }
+
+  .piano-my-page__logout-button {
+    width: 165px;
+    max-width: 100%;
+    padding: 0.2em 0.9rem;
+    transition: color .24s ease-in-out,background-color .24s ease-in-out;
+    border: 1px solid #000;
+    background-color: #fff;
+
+      & i {
+        transform: rotate(180deg);
+        margin-right: 4px;
+      }
+  }
+}

@@ -1,0 +1,198 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Typography
+
+Need to import a font or set of icons for your site? Drop them in
+here or just use this to establish your typographical grid. Or not.
+Do whatever you want to...GOSH!
+
+Helpful Articles:
+http://trentwalton.com/2012/06/19/fluid-type/
+http://ia.net/blog/responsive-typography-the-basics/
+http://alistapart.com/column/responsive-typography-is-a-physical-discipline
+
+******************************************************************/
+
+
+/*********************
+FONT FACE (IN YOUR FACE)
+*********************/
+
+/*  To embed your own fonts, use this syntax
+  and place your fonts inside the
+  library/fonts folder. For more information
+  on embedding fonts, go to:
+  http://www.fontsquirrel.com/
+  Be sure to remove the comment brackets.
+*/
+
+/*  @font-face {
+      font-family: 'Font Name';
+      src: url('library/fonts/font-name.eot');
+      src: url('library/fonts/font-name.eot?#iefix') format('embedded-opentype'),
+             url('library/fonts/font-name.woff') format('woff'),
+             url('library/fonts/font-name.ttf') format('truetype'),
+             url('library/fonts/font-name.svg#font-name') format('svg');
+      font-weight: normal;
+      font-style: normal;
+  }
+*/
+
+
+/*
+The following is based of Typebase:
+https://github.com/devinhunt/typebase.css
+I've edited it a bit, but it's a nice starting point.
+*/
+
+
+// font stacks
+$sans-serif: 'Noto Sans JP',
+'Helvetica Neue',
+Helvetica,
+Arial,
+sans-serif;
+$serif: "Georgia",
+Cambria,
+Times New Roman,
+Times,
+serif;
+
+/*
+ i imported this one in the functions file so bones would look sweet.
+ don't forget to remove it for your site.
+*/
+$roboto: 'Roboto',
+$sans-serif;
+
+/*
+some nice typographical defaults
+more here: http://www.newnet-soft.com/blog/csstypography
+*/
+p {
+  word-wrap: break-word;
+  // cleaning up the ragged lines and breaks
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  // sets a minimum number of characters before and after the break
+  -webkit-hyphenate-before: 2;
+  -webkit-hyphenate-after: 3;
+  hyphenate-lines: 3;
+  // enabling fancy ligatures when available
+  font-feature-settings: "palt"1;
+}
+
+
+/*********************
+MIXINS
+*********************/
+@mixin fs-hint-text {
+  @include fts(-4);
+  line-height: .75rem;
+}
+
+@mixin fs-smallest-text {
+  @include fts(-3);
+  line-height: .75rem;
+}
+
+@mixin fs-smaller-text {
+  @include fts(-2);
+  line-height: 1.25rem;
+}
+
+@mixin fs-small-text {
+  @include fts(-1);
+  line-height: 1.25rem;
+}
+
+@mixin fs-body-text {
+  @include fts();
+  line-height: 1.5rem;
+}
+
+@mixin fs-h1 {
+  font-size: 2.5em;
+  line-height: 1.333em;
+}
+
+@mixin fs-h2 {
+  @include fts(5);
+  line-height: 3.5rem;
+  font-weight: $bold;
+}
+
+@mixin fs-sp-title {
+  @include fts(4);
+  line-height: 2.375rem;
+  font-weight: $bold;
+}
+
+@mixin fs-h3 {
+  @include fts(3);
+  line-height: 2.375rem;
+  font-weight: $bold;
+}
+
+@mixin fs-h4 {
+  @include fts(2);
+  line-height: 2rem;
+  font-weight: bold;
+}
+
+@mixin fs-h5 {
+  @include fts(1);
+  line-height: 1.75rem;
+}
+
+@mixin fs-single-title {
+  @include fts(4);
+  line-height: 2.9rem;
+}
+
+@mixin fs-17chara {
+  font-size: 5.5vw;
+  line-height: 5.5vw * 1.5;
+}
+
+@mixin fs-17chara-tab {
+  font-size: 3.5vw;
+  line-height: 3.5vw * 1.5;
+}
+
+@mixin fs-article-list {
+  font-size: 3.4vw;
+  line-height: 3.4vw * 1.5;
+}
+
+@mixin fs-article-list-tab {
+  @include fts(.5);
+}
+
+@mixin fs-sp-h2 {
+  font-size: 5vw;
+  line-height: 5vw * 1.5;
+}
+
+@mixin fs-sp-h3 {
+  font-size: 4.6vw;
+  line-height: 4.6vw * 1.5;
+}
+
+@mixin fs-sp-h4 {
+  font-size: 4.2vw;
+  line-height: 4.2vw * 1.5;
+}
+
+@mixin fs-sp-h5 {
+  font-size: 3.8vw;
+  line-height: 3.8vw * 1.5;
+}
+
+@mixin fs-sp-h6 {
+  font-size: 3.4vw;
+  line-height: 3.4vw * 1.5;
+}

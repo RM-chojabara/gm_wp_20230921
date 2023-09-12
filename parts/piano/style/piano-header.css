@@ -1,0 +1,350 @@
+@charset "UTF-8";
+#header-image {
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  height: 13.3333333333vw;
+  min-height: 50px;
+}
+@media screen and (min-width: 769px) {
+  #header-image {
+    height: 8.0527086384vw;
+  }
+}
+
+#logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 50px;
+  height: 13.3333333333vw;
+}
+@media screen and (min-width: 769px) {
+  #logo {
+    height: 8.0527086384vw;
+  }
+}
+#logo a {
+  width: 22.1333333333vw;
+  height: 13.3333333333vw;
+}
+@media screen and (min-width: 769px) {
+  #logo a {
+    width: 13.2503660322vw;
+    height: 4.3191800878vw;
+  }
+}
+
+@media only screen and (max-width: 768px) and (max-width: 768px) {
+  .nav-wrap .inner {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.87);
+    position: relative;
+    padding: 2.5rem;
+    padding-top: 186px;
+  }
+}
+/* 検索ナビ
+--------------------------------------------------*/
+@media screen and (max-width: 768px) {
+  .nav-search .searchform {
+    margin: 0 !important;
+  }
+  .nav-search .searchform > div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .nav-search .searchform > div .input-area {
+    margin-top: 0;
+    padding: 0 0.5rem;
+    background-color: rgba(255, 255, 255, 0.87);
+    color: rgba(0, 0, 0, 0.54);
+    max-width: 100%;
+  }
+  .nav-search .searchform > div .input-area::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .nav-search .searchform > div .input-area::-moz-placeholder {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .nav-search .searchform > div .input-area:-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .nav-search .searchform > div .input-area::-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .nav-search .searchform > div .input-area::placeholder {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .nav-search .searchform > div .input-area + .search-button {
+    right: 2%;
+  }
+  .nav-search .searchform > div .input-area + .search-button i {
+    color: rgba(0, 0, 0, 0.54);
+  }
+}
+@media screen and (min-width: 769px) {
+  .nav-search {
+    max-width: 130px;
+  }
+}
+
+/* header navigation　PC右配置
+--------------------------------------------------*/
+@media screen and (min-width: 769px) {
+  .nav--pc-right {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+}
+
+/* header-navigation SM上配置
+--------------------------------------------------*/
+@media screen and (max-width: 768px) {
+  .nav--sm-top {
+    margin-top: 4rem !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: none !important;
+    padding: 0 2.5rem 0.75rem !important;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+}
+
+/* ヘッダーメニュー基本スタイル
+--------------------------------------------------*/
+.header .subscribe-gm, .header .piano-login-container button,
+.header .piano-login-container a {
+  color: white;
+  font-weight: 700;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+.header .subscribe-gm i, .header .piano-login-container button i,
+.header .piano-login-container a i {
+  color: white;
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+/* piano
+--------------------------------------------------*/
+.header .piano-login-container {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+}
+@media screen and (min-width: 769px) {
+  .header .piano-login-container {
+    border: none;
+  }
+  .header .piano-login-container::before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.12);
+    left: -1rem;
+    top: 0;
+  }
+}
+.header .piano-login-container button,
+.header .piano-login-container a {
+  padding: 0.3em 0.9rem;
+  border: 1px solid white;
+  background-color: rgba(0, 0, 0, 0);
+  font-weight: bold;
+  border: none;
+  font-size: 14.22px;
+  -webkit-transition: opacity 0.24s ease-in-out;
+  transition: opacity 0.24s ease-in-out;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+@media screen and (min-width: 769px) {
+  .header .piano-login-container button,
+  .header .piano-login-container a {
+    display: inline-block;
+    padding: 1rem 0;
+    text-align: left;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1029px) {
+  .header .piano-login-container button,
+  .header .piano-login-container a {
+    padding: 0.2em 0;
+    border: none;
+  }
+}
+.header .piano-login-container button:hover,
+.header .piano-login-container a:hover {
+  opacity: 0.8;
+}
+@media screen and (max-width: 768px) {
+  .header .piano-login-container a {
+    background-color: white;
+    color: black;
+  }
+  .header .piano-login-container a i {
+    color: black;
+  }
+}
+
+/* ギタマガ
+--------------------------------------------------*/
+.header .subscribe-gm {
+  padding: 0.3em 0.9rem;
+  font-size: 14.22px;
+  -webkit-transition: color 0.24s ease-in-out, background-color 0.24s ease-in-out;
+  transition: color 0.24s ease-in-out, background-color 0.24s ease-in-out;
+  border: 1px solid white;
+}
+@media screen and (max-width: 768px) {
+  .header .subscribe-gm {
+    width: 100%;
+    display: inline-block;
+    margin-top: 1rem;
+    text-align: center;
+    position: relative;
+  }
+  .header .subscribe-gm::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.12);
+    bottom: -1.5rem;
+    left: 0;
+  }
+}
+@media screen and (min-width: 769px) {
+  .header .subscribe-gm {
+    margin-left: 1rem;
+    padding: 0.2em 0.9rem;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1099px) {
+  .header .subscribe-gm {
+    padding: 0.2em 0;
+    border: none;
+  }
+}
+.header .subscribe-gm:hover i {
+  opacity: 0.8;
+}
+@media screen and (min-width: 1100px) {
+  .header .subscribe-gm:hover {
+    color: black;
+    background-color: white;
+  }
+  .header .subscribe-gm:hover i {
+    color: black;
+  }
+}
+.header .subscribe-gm i {
+  -webkit-transition: color 0.24s ease-in-out, opacity 0.24s ease-in-out;
+  transition: color 0.24s ease-in-out, opacity 0.24s ease-in-out;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1099px) {
+  .hidden-769-1099 {
+    display: none !important;
+  }
+}
+
+/* logo-hidden
+--------------------------------------------------*/
+@media screen and (max-width: 768px) {
+  #logo_hidden {
+    display: none;
+  }
+}
+
+/* header__cta
+--------------------------------------------------*/
+.cta-nav {
+  background-color: black;
+}
+@media screen and (min-width: 769px) {
+  .cta-nav {
+    display: none;
+  }
+}
+
+.cta-nav__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  -webkit-column-gap: 1rem;
+     -moz-column-gap: 1rem;
+          column-gap: 1rem;
+  padding: 8px 24px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.cta-nav__item {
+  width: 50%;
+  background-color: rgba(0, 0, 0, 0);
+  text-align: center;
+  font-size: 12.8px;
+  -webkit-transition: opacity 0.24s ease-in-out;
+  transition: opacity 0.24s ease-in-out;
+}
+.cta-nav__item:hover {
+  opacity: 0.8;
+}
+.cta-nav__item .account-gm {
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  width: 100%;
+  font-weight: 700;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.cta-nav__item .subscribe-gm {
+  font-weight: 700;
+  width: 100%;
+  color: white;
+  border: 1px solid white;
+  padding: 0.3em 0;
+  display: inline-block;
+}
+.cta-nav__item i {
+  margin-left: 0.5rem;
+}

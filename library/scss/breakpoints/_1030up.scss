@@ -1,0 +1,178 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Desktop Stylsheet
+
+This is the desktop size. It's larger than an iPad so it will only
+be seen on the Desktop.
+
+******************************************************************/
+
+/*********************
+HEADER STYLES
+*********************/
+.header .sns {
+  display: none;
+}
+
+
+/*********************
+TOP PAGE STYLES
+*********************/
+.ppa {
+  flex-direction: column;
+
+  .img,
+  .titles {
+    width: 100%;
+  }
+
+  .img {
+    padding-top: 50%;
+  }
+
+  .titles {
+    width: calc(100% - 3rem);
+    margin-top: -$mg*8;
+    margin-right: auto;
+    margin-left: auto;
+    z-index: 2;
+
+    .entry-title {
+      br {
+        display: none;
+      }
+    }
+
+    .the_excerpt {
+      display: block;
+    }
+  }
+}
+
+.articles-wrap-pu,
+.articles-wrap-4 {
+  article {
+    margin: 0 $mg*2 0 0;
+  }
+}
+
+.articles-wrap-pu {
+  article {
+    margin: 0;
+  }
+}
+
+.pua {
+  .titles {
+    position: static;
+    padding: 0;
+    background: none;
+
+    .entry-title {
+      span {
+        padding: 0;
+        background: none;
+      }
+    }
+  }
+}
+
+.lta {
+  .titles {
+    .entry-title {
+
+      a span,
+      a:visited span {
+        @include fc($black, $txt);
+
+        &:hover,
+        &:focus {
+          @include fc($black, $sub);
+        }
+      }
+
+    }
+
+    ul.cat a,
+    ul.cat a:visited {
+      @include fc($black, $txt);
+
+      &:hover,
+      &:focus {
+        @include fc($black, $sub);
+      }
+    }
+
+    time {
+      @include fc($black, $hint);
+    }
+
+    ul.genre {
+      li:before {
+        content: "#";
+        display: inline;
+        @include fc($black, $sub);
+      }
+
+      a,
+      a:visited {
+        @include fc($black, $sub);
+
+        &:hover,
+        &:focus {
+          @include fc($black, $pure);
+        }
+      }
+    }
+  }
+}
+
+.mga {
+  .btn-list {
+    flex-direction: column;
+
+    li {
+      width: auto;
+      margin: 0 0 $mg;
+    }
+  }
+}
+
+
+
+
+
+
+/*********************
+SINGLE PAGE STYLES
+*********************/
+
+.single-title-area {
+  .img {
+    height: auto;
+    width: 100%;
+    padding-top: 50%;
+
+    .bg {
+      display: none;
+    }
+
+    .layer {
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      transform: translate(0, 0);
+    }
+  }
+
+  .titles {
+    .entry-title {
+      // font-size: 5.5vw;
+      // line-height: 5.5vw * 1.5;
+    }
+  }
+}

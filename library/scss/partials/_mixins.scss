@@ -1,0 +1,106 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Mixins Stylesheet
+
+This is where you can take advantage of Sass' great features: Mixins.
+I won't go in-depth on how they work exactly,
+there are a few articles below that will help do that. What I will
+tell you is that this will help speed up simple changes like
+changing a color or adding CSS3 techniques gradients.
+
+A WORD OF WARNING: It's very easy to overdo it here. Be careful and
+remember less is more.
+
+Helpful:
+http://sachagreif.com/useful-sass-mixins/
+http://thesassway.com/intermediate/leveraging-sass-mixins-for-cleaner-code
+http://web-design-weekly.com/blog/2013/05/12/handy-sass-mixins/
+
+******************************************************************/
+
+
+/*********************
+TRANSITION
+*********************/
+
+/*
+I totally rewrote this to be cleaner and easier to use.
+You'll need to be using Sass 3.2+ for these to work.
+Thanks to @anthonyshort for the inspiration on these.
+USAGE: @include transition(all 0.2s ease-in-out);
+*/
+
+@mixin transition($transition...) {
+  // defining prefixes so we can use them in mixins below
+  $prefixes:      ("-webkit-", "" );
+  @each $prefix in $prefixes {
+    #{$prefix}transition: $transition;
+  }
+}
+
+@mixin trans($sec: .1s){
+  -webkit-transition: $sec ease-in-out;
+  -moz-transition: $sec ease-in-out;
+  transition: $sec ease-in-out;
+}
+
+
+
+/*********************
+FONT SIZE
+*********************/
+@mixin fts($num:0){
+  font-size: 1rem * 8 / (8 - $num);
+}
+
+/*********************
+FONT COLOR
+*********************/
+$pure: 1; $txt:.87; $sub: .54; $hint: .34; $thin: .12;
+@mixin fc($fc, $opa) {
+  color: rgba($fc,$opa);
+}
+
+
+/*********************
+BORDER SETTING
+*********************/
+@mixin bd($color:$black , $opacity: .12 , $width: 1px , $type: solid) {
+  border: $width $type rgba($color, $opacity)
+}
+
+
+/*********************
+WIDTH
+*********************/
+@mixin wid($parent , $child){
+  width: ($child / $parent) *100%;
+}
+
+
+/*********************
+CLEAR FIX
+*********************/
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
+
+
+/*********************
+LINE HEIGHT CROP
+*********************/
+@mixin lhCrop($line-height) {
+  &::before {
+    content: '';
+    display: block;
+    height: 0;
+    width: 0;
+    margin-top: calc((1 - #{$line-height}) * 0.5em);
+  }
+}

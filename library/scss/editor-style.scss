@@ -1,0 +1,597 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: TinyMCE Editor
+
+This stylesheet is loaded automatically by Wordpress when compiled
+and placed in the root theme directory folder as editor-style.css
+
+For more info, check out the codex:
+http://codex.wordpress.org/Editor_Style
+
+******************************************************************/
+
+/* Wrap the entire post style inside the TinyMCE selector, as suggested
+here http://codex.wordpress.org/Function_Reference/add_editor_style */
+body {
+
+	// normalize: http://necolas.github.io/normalize.css/
+	@import "partials/normalize";
+
+	// Sass variables
+	@import "partials/variables";
+
+	// typography
+	@import "partials/typography";
+
+	// Sass functions
+	@import "partials/functions";
+
+	// import mixins
+	@import "partials/mixins";
+
+	//width: 731px;
+	font-family: $roboto;
+	font-size: 16px;
+	line-height: 1.5rem;
+	@include fc($black, $txt);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+
+	/*********************
+	LINK STYLES
+	*********************/
+
+	a,
+	a:visited {
+		color: $link-color;
+
+		/* on hover */
+		&:hover,
+		&:focus {
+			color: $link-hover;
+		}
+
+		/* on click */
+		&:active {}
+
+		&:link {
+
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
+		}
+	}
+
+	/******************************************************************
+	H1, H2, H3, H4, H5 STYLES
+	******************************************************************/
+
+	.editor-post-title__block .editor-post-title__input {
+		font-family: $roboto;
+	}
+
+	h1,
+	.h1,
+	h2,
+	.h2,
+	h3,
+	.h3,
+	h4,
+	.h4,
+	h5,
+	.h5 {
+		text-rendering: optimizelegibility;
+		font-weight: 700;
+		font-feature-settings: "palt";
+
+		a {
+			text-decoration: none;
+		}
+	}
+
+	h1,
+	.h1 {
+		margin-top: $mg*8;
+		margin-bottom: $mg*5;
+		@include fs-h2;
+	}
+
+	h2,
+	.h2 {
+		@include fs-h3;
+		margin-top: $mg*8;
+		margin-bottom: $mg*4;
+	}
+
+	h3,
+	.h3 {
+		@include fs-h4;
+		margin-top: $mg*4;
+		margin-bottom: $mg*3;
+	}
+
+	h4,
+	.h4 {
+		@include fs-h5;
+		margin-top: $mg*3;
+		margin-bottom: $mg*2;
+	}
+
+	h5,
+	.h5 {
+		font-size: 0.846em;
+		line-height: 2.09em;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+
+		&:before {
+			content: "";
+			margin-right: 1rem;
+			display: inline-block;
+			background: rgba($black, $hint);
+			width: 1rem;
+			height: 2px;
+			vertical-align: middle;
+		}
+	}
+
+	h6 {
+		@include fts(-2);
+	}
+
+	padding: 1.5em 1.5em 0;
+
+	p {
+		margin-top: $mg*3;
+		margin-bottom: $mg*3;
+		line-height: 1.75rem;
+		font-feature-settings: "palt";
+	}
+
+	.has-small-font-size {
+		@include fs-smaller-text;
+	}
+
+	.has-regular-font-size {
+		@include fs-body-text;
+	}
+
+	.has-medium-font-size {
+		@include fs-h5;
+	}
+
+	.has-large-font-size {
+		@include fs-h4;
+		font-weight: $reg;
+	}
+
+	.has-larger-font-size {
+		@include fs-single-title;
+	}
+
+	.has-huge-font-size {
+		@include fs-h2;
+		font-weight: $reg;
+	}
+
+	.has-background {
+		padding: $mg*3;
+	}
+
+	ul,
+	ol {
+		margin-top: $mg*5;
+		margin-bottom: $mg*5;
+
+		li {
+			position: relative;
+			padding-left: 1rem;
+			margin-bottom: $mg*2;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+	}
+
+	ul {
+
+		li {
+
+			&:before {
+				display: inline-block;
+				position: absolute;
+				top: .65rem;
+				left: 0;
+				content: "";
+				height: .25rem;
+				width: .25rem;
+				vertical-align: middle;
+				background: rgba($black, $sub);
+				border-radius: 100%;
+			}
+		}
+
+		&.cat,
+		&.genre {
+			li {
+				padding: 0;
+
+				&:before {
+					display: none;
+				}
+			}
+		}
+
+	}
+
+	ol {
+		counter-reset: item;
+
+		li {
+			&:before {
+				display: inline-block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				counter-increment: item;
+				content: counter(item)'.';
+				@include fc($black, $sub);
+				font-weight: $bold;
+				@include fts(-2);
+				vertical-align: middle;
+			}
+		}
+
+	}
+
+	table {
+		width: 100%;
+		border: 1px solid $gray;
+		margin-bottom: 1.5em;
+
+		caption {
+			margin: 0 0 7px;
+			font-size: 0.75em;
+			color: $meta-gray;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+	}
+
+	tr {
+		border-bottom: 1px solid $gray;
+
+		&:nth-child(even) {
+			background-color: $light-gray;
+		}
+	}
+
+	td {
+		padding: 7px;
+		border-right: 1px solid $gray;
+
+		&:last-child {
+			border-right: 0;
+		}
+	}
+
+	th {
+		background-color: $light-gray;
+		border-bottom: 1px solid $gray;
+		border-right: 1px solid $gray;
+
+		&:last-child {
+			border-right: 0;
+		}
+	}
+
+	blockquote {
+		margin: 0 0 1.5em 0.75em;
+		padding: 0 0 0 0.75em;
+		border-left: 3px solid $blue;
+		font-style: italic;
+		color: $meta-gray;
+
+		&:before {}
+
+	}
+
+	dd {
+		margin-left: 0;
+		font-size: 0.9em;
+		color: #787878;
+		margin-bottom: 1.5em;
+	}
+
+	img {
+		margin: 0 0 1.5em 0;
+		max-width: 100%;
+		height: auto;
+	}
+
+	.size-auto,
+	.size-full,
+	.size-large,
+	.size-medium,
+	.size-thumbnail {
+		max-width: 100%;
+		height: auto;
+	}
+
+	pre {
+		background: $black;
+		color: $light-gray;
+		font-size: 0.9em;
+		padding: 1.5em;
+		margin: 0 0 1.5em;
+		border-radius: 3px;
+	}
+
+
+	.black-title-big,
+	.is-style-black-title-big {
+		background: rgba($black, $txt);
+		@include fc($white, $pure);
+		padding: $mg*2;
+	}
+
+	.black-title-small,
+	.is-style-black-title-small {
+		background: rgba($black, $sub);
+		@include fc($white, $pure);
+		padding: $mg $mg*2;
+	}
+
+	// INTERVIEW TITLES
+	.interview-h2,
+	.is-style-interview-h2 {
+		font-weight: $reg;
+		margin-top: $mg*8;
+		margin-bottom: $mg*8;
+	}
+
+	.interview-h3,
+	.is-style-interview-h3 {
+		font-weight: $bold;
+		opacity: .54;
+		margin-top: $mg*3;
+		margin-bottom: $mg*3;
+		position: relative;
+		padding-left: 2rem;
+
+		&:before {
+			display: block;
+			line-height: 1;
+			position: absolute;
+			left: 0;
+			content: "";
+			width: 1.5rem;
+			height: 2px;
+			background: rgba($black, $hint);
+			vertical-align: middle;
+			margin-right: .5rem;
+			margin-top: -1px;
+		}
+
+		&.has-text-color {
+			opacity: 1;
+		}
+	}
+
+	h2.is-style-interview-h3:before,
+	h2.interview-h3:before {
+		top: 1.3rem;
+	}
+
+	h3.is-style-interview-h3:before,
+	h3.interview-h3:before {
+		top: 1rem;
+	}
+
+	h4.is-style-interview-h3:before,
+	h4.interview-h3:before {
+		top: .9rem;
+	}
+
+	h5.is-style-interview-h3:before,
+	h5.interview-h3:before {
+		top: .9rem;
+	}
+
+	h6.is-style-interview-h3:before,
+	h6.interview-h3:before {
+		top: .7rem;
+	}
+
+	//LEAD SETTINGS
+	.credit,
+	.is-style-credit {
+		font-weight: $reg;
+		@include fs-smaller-text;
+		@include fc($black, $sub);
+	}
+
+	.lead,
+	.is-style-lead {
+		margin: $mg*5 auto;
+		border-bottom: 2px solid $border-color;
+		padding: 0 6% $mg*3;
+		font-weight: $bold;
+
+		*:last-child {
+			margin-bottom: 0;
+		}
+
+		*:first-child {
+			margin-top: 0;
+		}
+
+		strong {
+			@include fc($bones-pink, $pure);
+			font-style: italic;
+			text-decoration: underline wavy;
+			position: relative;
+			background: $alert-yellow;
+		}
+	}
+
+	.main-image,
+	.is-style-main-image {
+		margin-bottom: $mg*5;
+
+		img {
+			margin: 0;
+		}
+	}
+
+	.border-box,
+	.is-style-border-box {
+		border: 1px solid $border-color;
+		padding: $mg*3;
+		box-sizing: border-box;
+
+		*:first-child {
+			margin-top: 0;
+		}
+
+		*:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	.gray-bg,
+	.is-style-gray-bg {
+		margin-top: $mg*4;
+		margin-bottom: $mg*4;
+		background: rgba($black, .05);
+		padding: $mg*4;
+
+		*:first-child {
+			margin-top: 0;
+		}
+
+		*:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	.slider,
+	.is-style-slider {
+		margin-right: auto;
+		margin-left: auto;
+		border: 2px dashed $border-color;
+		padding: $mg*2;
+
+		&:before {
+			content: 'SLIDER';
+			font-weight: $bold;
+			@include fts(-2);
+			font-style: italic;
+			text-align: center;
+			width: 100%;
+			@include fc($black, $hint);
+		}
+
+		.wp-block-group__inner-container {
+			.wp-block-group {
+				background: rgba($black, .05);
+				padding: $mg*2;
+			}
+		}
+	}
+
+	//COLOR
+	.has-white-color {
+		color: #FFFFFF !important;
+	}
+
+	.has-white-background-color {
+		background-color: #FFFFFF !important;
+	}
+
+	.has-black-color {
+		color: #000000 !important;
+	}
+
+	.has-black-background-color {
+		background-color: #000000 !important;
+	}
+
+	.has-blue-color {
+		color: #0468BF !important;
+	}
+
+	.has-blue-background-color {
+		background-color: #0468BF !important;
+	}
+
+	.has-lightblue-color {
+		color: #049DBF !important;
+	}
+
+	.has-lightblue-background-color {
+		background-color: #049DBF !important;
+	}
+
+	.has-green-color {
+		color: #3B592D !important;
+	}
+
+	.has-green-background-color {
+		background-color: #3B592D !important;
+	}
+
+	.has-red-color {
+		color: #BF2C47 !important;
+	}
+
+	.has-red-background-color {
+		background-color: #BF2C47 !important;
+	}
+
+	/*********************
+		LARGER MOBILE DEVICES
+		This is for devices like the Galaxy Note or something that's
+		larger than an iPhone but smaller than a tablet. Let's call them
+		tweeners.
+		*********************/
+	@media only screen and (min-width: 481px) {
+
+		/* at this larger size, we can start to align images */
+		.alignleft,
+		img.alignleft {
+			margin-right: 1.5em;
+			display: inline;
+			float: left;
+		}
+
+		.alignright,
+		img.alignright {
+			margin-left: 1.5em;
+			display: inline;
+			float: right;
+		}
+
+		.aligncenter,
+		img.aligncenter {
+			margin-right: auto;
+			margin-left: auto;
+			display: block;
+			clear: both;
+		}
+
+	}
+
+
+	.wp-block {
+		max-width: 960px;
+
+		&.narrow {
+			max-width: 676px;
+		}
+	}
+
+}

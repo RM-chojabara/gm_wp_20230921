@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+.ad > .wrap {
+        padding: 0;
+}
+
+.adblock-pc > div, .adblock-sp > div {
+        border: none;
+        background: #f6f6f6;
+        margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px) {
+        .adblock-pc {display: block;}
+        .adblock-sp {display: none;}
+
+        .home #div-gpt-ad-1595982742603-0 {display: none;} /*AD-Tag "All-B" on Home Hidden */
+        .archive #div-gpt-ad-1597310951756-0, .single #div-gpt-ad-1597310951756-0 {display: none;} /*AD-Tag "Home-B" on Archive/Article Hidden */
+
+}
+@media only screen and (min-width: 769px) and (max-width: 880px) {
+        .home #ad-area-02 {display: none;} /*AD-Area-02 on Home Hidden */
+}
+@media only screen and (max-width: 767px) {
+        .adblock-pc {display: none;}
+        .adblock-sp {display: block;}
+}
+
+
+/*sidebar - AdArea05,06,07 */
+.ads > .ad {
+        border: none;
+        padding: 0;
+}

@@ -1,0 +1,42 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Super Large Monitor Stylesheet
+
+You can add some advanced styles here if you like. This kicks in
+on larger screens.
+
+******************************************************************/
+
+//TOP
+.ppa{
+  .titles{
+    .the_excerpt{display: none;}
+  }
+}
+
+.playlist-carousel{
+  .owl-nav{
+    .owl-next{
+      right: 1rem;
+    }
+  }
+}
+
+.contain-sidebar{
+  max-width: calc(1040px + 3rem);
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+
+/* Entry content */
+.entry-content{
+  .cover-image{
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+
+  }
+}

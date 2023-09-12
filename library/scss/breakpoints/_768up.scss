@@ -1,0 +1,683 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Tablet & Small Desktop Stylesheet
+
+Here's where you can start getting into the good stuff.
+This size will work on iPads, other tablets, and desktops.
+So you can start working with more styles, background images,
+and other resources. You'll also notice the grid starts to
+come into play. Have fun!
+
+******************************************************************/
+
+
+/*********************
+GENERAL STYLES
+*********************/
+
+body {
+	&.fixed {
+		overflow: hidden;
+		//padding-right: 15px;
+	}
+}
+
+//#content{margin-top: 0 !important;}
+
+/*********************
+LAYOUT & GRID STYLES
+*********************/
+
+.wrap {
+	//width: 760px;
+}
+
+
+.contain-sidebar {
+	display: flex;
+	flex-direction: column;
+
+	.inl {
+		min-width: 0;
+	}
+
+	.inr {
+		margin: $mg*7 0 0;
+		width: 100%;
+		max-width: 100%;
+
+		.ads {
+			overflow: hidden;
+
+			.ad-area {
+				float: left;
+				margin: 0 2% 0 0;
+				width: calc(96% / 3);
+				padding-top: calc(96% * 0.83 / 3);
+
+				&:last-child {
+					margin: 0;
+				}
+			}
+		}
+	}
+}
+
+.inloop {
+	border: none;
+	padding: 0;
+}
+
+
+/******************************************************************
+H1, H2, H3, H4, H5 STYLES
+******************************************************************/
+
+.section-title {
+	@include fs-h4;
+	padding-right: 1rem;
+
+	a,
+	a:visited {
+
+		i {
+			@include fts();
+			@include fc($black, $hint);
+			@include trans;
+			line-height: 1;
+			position: absolute;
+			top: 50%;
+			right: 0;
+			transform: translate(0, -50%);
+		}
+
+		&:hover,
+		&:focus {
+			i {
+				@include fc($black, $pure);
+				transform: translate(.2rem, -50%);
+			}
+		}
+	}
+}
+
+
+/*********************
+HEADER STYLES
+*********************/
+
+
+
+/*********************
+BREADCRUMBS STYLES
+*********************/
+
+
+/*********************
+NAVIGATION STYLES
+*********************/
+
+
+
+
+/*********************
+POSTS & CONTENT STYLES
+*********************/
+.hentry {
+	.titles {
+		.entry-title {
+			br {
+				display: none;
+			}
+		}
+	}
+
+	footer {
+
+		margin-top: $mg*4;
+		margin-bottom: $mg*4;
+
+		.genre,
+		.tag {
+			margin: 0 0 $mg;
+
+			dt,
+			dd {
+				@include fs-smallest-text;
+			}
+		}
+
+		.bottom-categories {
+			margin: $mg*3 0 0;
+			padding: $mg 0 0;
+
+			.cat {
+				li {
+					&:after {
+						margin: 0;
+						@include fc($black, $thin);
+						font-weight: $reg;
+					}
+
+					a,
+					a:visited {
+						@include fs-smaller-text;
+					}
+				}
+			}
+		}
+	}
+}
+
+/* #pick-up{
+	background: $light-gray;
+	padding-top: $mg*5;
+	padding-bottom: $mg*5;
+	article{
+		background: $white;
+	}
+} */
+
+#playlist {
+	article {
+		width: 100%;
+	}
+}
+
+
+.special-articles-wrap-inner {
+	padding-top: 0;
+}
+
+.spa {
+
+
+	&:first-of-type {
+		flex-direction: column;
+		padding-bottom: $mg*4;
+		margin-bottom: $mg*4;
+
+		.titles {
+			order: 2;
+		}
+
+		.img {
+			order: 1;
+			width: calc(100% + $mg*6);
+			padding-top: 50%;
+		}
+	}
+}
+
+.mga {
+	&:first-of-type {
+		.img {
+			max-width: 60%;
+			min-width: 35%;
+			margin: 0;
+			padding-top: 0;
+		}
+
+		.btn-list {
+			margin-top: $mg*3;
+			margin-bottom: 0;
+			flex-direction: row;
+			justify-content: center;
+
+			li {
+				margin: 0 $mg 0 0;
+
+				&:last-child {
+					margin: 0;
+				}
+			}
+		}
+	}
+}
+
+
+
+.contain-categories {
+
+
+	ul:before {
+		top: 0.5rem;
+	}
+
+	p,
+	ul,
+	li,
+	a {
+		@include fs-smallest-text;
+		line-height: 1rem;
+		font-weight: $reg;
+	}
+}
+
+
+.articles-wrap-4,
+.articles-wrap-main,
+.articles-wrap-pu,
+.archive-wrap {
+	article {
+		.entry-title {
+			@include fs-article-list-tab;
+		}
+	}
+}
+
+.articles-wrap-lt {
+	article {
+		width: calc(100% / 2 - $mg*1.5);
+		margin: 0 0 0;
+	}
+}
+
+.articles-wrap-pu {
+	flex-wrap: wrap;
+
+	article {
+		width: calc(100% / 2 - $mg*1.5);
+
+		&:first-child {
+			width: 100%;
+		}
+	}
+}
+
+.archive-wrap {
+	.inl {
+		article {
+			width: calc(98% / 2);
+			margin: 0 2% 1.5rem 0;
+
+			&:first-child {
+				width: 100%;
+				margin-right: 0;
+			}
+
+			&:nth-child(2n+1) {
+				margin-right: 0;
+			}
+
+			&:nth-child(3n+1) {}
+		}
+	}
+}
+
+//指板図くん
+
+.custom_link_wrap {
+	margin-top: $mg*3;
+	flex-direction: column;
+	gap: $mg*2;
+}
+
+.custom_link {
+	max-width: 100%;
+
+	.img,
+	.title {
+		width: 100%;
+	}
+
+	.title p {
+		@include fs-article-list;
+	}
+}
+
+
+/*********************
+ENTRY CONTENT
+*********************/
+.entry-content {
+
+	//ALIGN SETTINGS
+	.alignwide {
+		margin-right: auto;
+		margin-left: auto;
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.alignleft,
+	.alignright {
+		float: none;
+		margin-right: 0;
+		margin-left: 0;
+	}
+
+
+	.slider,
+	.is-style-slider {
+		width: 100%;
+		padding: 0 0 $mg*2 0;
+
+		.owl-nav {
+			button {
+				background: rgba($black, $pure);
+				@include fc($white, $pure);
+				border-radius: 100%;
+				width: 1.5rem;
+				height: 1.5rem;
+			}
+
+			i {
+				@include fts(-3);
+			}
+
+			.owl-prev,
+			.owl-next {
+				position: absolute;
+			}
+
+			.owl-prev {
+				left: -$mg*2;
+			}
+
+			.owl-next {
+				right: -$mg*2;
+			}
+		}
+	}
+
+	.lead,
+	.is-style-lead {
+		margin: 0;
+		padding: 0 0 $mg*2;
+	}
+
+
+	.credit,
+	.is-style-credit {
+		@include fs-smallest-text;
+		line-height: 1rem;
+	}
+
+
+
+
+
+	// INTERVIEW TITLES
+	.interview-h3,
+	.is-style-interview-h3 {
+		//@include fs-h5;
+		padding-left: 1.5rem;
+
+		&:before {
+			width: 1rem;
+			margin-top: -.2rem;
+		}
+
+	}
+
+	.border-box,
+	.is-style-border-box {}
+
+
+	.wp-block-image {
+		margin-top: $mg*2;
+		margin-bottom: $mg*2;
+	}
+
+	.gray-bg,
+	.is-style-gray-bg,
+	.border-box,
+	.is-style-border-box {
+		padding: $mg*2;
+	}
+
+	//BLACK TITLES
+	>.black-title-big,
+	>.is-style-black-title-big,
+	>.black-title-small,
+	>.is-style-black-title-small {
+		width: calc(100% + $mg*6);
+		margin-left: -$mg*3;
+	}
+}
+
+/* end .entry-content */
+
+.single-title-area {
+	margin: 0 auto $mg*3;
+
+	.img {
+		padding-top: 50%;
+	}
+
+	.titles {
+		margin: $mg*2 auto;
+
+		.inner {
+			padding-bottom: $mg*2;
+			border-bottom-width: 3px;
+		}
+
+		time,
+		.genre li {
+			@include fs-smallest-text;
+			line-height: 1.2;
+		}
+
+		.entry-title {
+			@include fs-17chara-tab;
+		}
+	}
+}
+
+
+/*********************
+SIDEBARS & ASIDES
+*********************/
+
+.sidebar {
+	margin-top: 2.2em;
+}
+
+.widgettitle {
+	border-bottom: 2px solid #444;
+	margin-bottom: 0.75em;
+}
+
+.widget {
+	padding: 0 10px;
+	margin: 2.2em 0;
+
+	ul {
+		li {
+			margin-bottom: 0.75em;
+
+			&:first-child {}
+
+			&:last-child {}
+
+			a {}
+
+			/* deep nesting */
+
+			ul {
+				margin-top: 0.75em;
+				padding-left: 1em;
+			}
+		}
+	}
+}
+
+
+/* links widget */
+.widget_links {}
+
+.widget_links ul {}
+
+.widget_links ul li {}
+
+.widget_links ul li a {}
+
+/* meta widget */
+.widget_meta {}
+
+.widget_meta ul {}
+
+.widget_meta ul li {}
+
+.widget_meta ul li a {}
+
+/* pages widget */
+.widget_pages {}
+
+.widget_pages ul {}
+
+.widget_pages ul li {}
+
+.widget_pages ul li a {}
+
+/* recent-posts widget */
+.widget_recent_entries {}
+
+.widget_recent_entries ul {}
+
+.widget_recent_entries ul li {}
+
+.widget_recent_entries ul li a {}
+
+/* archives widget */
+.widget_archive {}
+
+.widget_archive ul {}
+
+.widget_archive ul li {}
+
+.widget_archive ul li a {}
+
+.widget_archive select {}
+
+.widget_archive option {}
+
+/* tag-cloud widget */
+.widget_links {}
+
+.widget_links li:after {}
+
+.widget_links li:before {}
+
+.widget_tag_cloud {}
+
+.widget_tag_cloud a {}
+
+.widget_tag_cloud a:after {}
+
+.widget_tag_cloud a:before {}
+
+/* calendar widget */
+.widget_calendar {}
+
+#calendar_wrap {}
+
+#calendar_wrap th {}
+
+#calendar_wrap td {}
+
+#wp-calendar tr td {}
+
+#wp-calendar caption {}
+
+#wp-calendar a {}
+
+#wp-calendar #today {}
+
+#wp-calendar #prev {}
+
+#wp-calendar #next {}
+
+#wp-calendar #next a {}
+
+#wp-calendar #prev a {}
+
+/* category widget */
+.widget_categories {}
+
+.widget_categories ul {}
+
+.widget_categories ul li {}
+
+.widget_categories ul ul.children {}
+
+.widget_categories a {}
+
+.widget_categories select {}
+
+.widget_categories select#cat {}
+
+.widget_categories select.postform {}
+
+.widget_categories option {}
+
+.widget_categories .level-0 {}
+
+.widget_categories .level-1 {}
+
+.widget_categories .level-2 {}
+
+.widget_categories .level-3 {}
+
+/* recent-comments widget */
+.recentcomments {}
+
+#recentcomments {}
+
+#recentcomments li {}
+
+#recentcomments li a {}
+
+.widget_recent_comments {}
+
+/* search widget */
+#searchform {}
+
+.widget_search {}
+
+.screen-reader-text {}
+
+/* text widget */
+.textwidget {}
+
+.widget_text {}
+
+.textwidget p {}
+
+
+/*********************
+FOOTER STYLES
+*********************/
+.footer {
+	.nav {
+		display: flex;
+	}
+}
+
+/*
+you'll probably need to do quite a bit
+of overriding here if you styled them for
+mobile. Make sure to double check these!
+*/
+.footer-links {
+	ul {
+		li {
+			a {
+				&:hover {}
+			}
+
+			/*
+			be careful with the depth of your menus.
+			it's very rare to have multi-depth menus in
+			the footer.
+			*/
+			ul {}
+		}
+	}
+}
+
+/* end .footer-links */
