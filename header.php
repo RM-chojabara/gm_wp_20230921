@@ -232,3 +232,75 @@
 
 
 			</header>
+			<?php // auth0 cdk ?>
+			<script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+
+			<button id="auth0-login">
+					auth0 login
+			</button>
+
+			<button id="auth0-logout">
+					auth0 logout
+			</button>
+
+			<div id="profile">
+				マイページ
+			</div>
+
+			<script type="text/javascript">
+				( async function(){
+					const loginButton = document.getElementById('auth0-login');
+					const logoutButton = document.getElementById('auth0-logout');
+					// console.log('buttons', loginButton, logoutButton);
+
+					const auth0Client = await auth0.createAuth0Client({
+						domain: "rittor-music-dev.jp.auth0.com",
+						clientId: "YqJvsG9ITMx8duXhLUPHmZj7aUoCt369",
+						authorizationParams: {
+							redirect_uri: window.location.origin
+						}
+					});
+					// console.dir(auth0Client);
+
+					// ログイン
+					loginButton.addEventListener('click', (e) => {
+						e.preventDefault();
+						auth0Client.loginWithRedirect();
+						console.log('login');
+					});
+
+					if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
+						await auth0Client.handleRedirectCallback();
+						window.history.replaceState({}, document.title, "/");
+					}
+
+					// ログアウト
+					logoutButton.addEventListener('click', (e) => {
+						e.preventDefault();
+						auth0Client.logout();
+						console.log('logout');
+					});
+
+					// マイページ
+					const isAuthenticated = await auth0Client.isAuthenticated();
+					console.log('isAuthenticated', isAuthenticated);
+					const userProfile = await auth0Client.getUser();
+
+					// Assumes an element with id "profile" in the DOM
+					const profileElement = document.getElementById("profile");
+
+					if (isAuthenticated) {
+						profileElement.style.display = "block";
+						profileElement.innerHTML = `
+										<p>${userProfile.name}</p>
+										<img src="${userProfile.picture}" />
+									`;
+						console.log('login now');
+					} else {
+						profileElement.style.display = "none";
+						console.log('not login');
+					}
+
+					console.log('auth0 cdk scripts');
+				})();
+			</script>
