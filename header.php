@@ -231,7 +231,7 @@
 			</header>
 
 
-			
+
 			<?php // auth0 cdk ?>
 			<script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
 
@@ -256,16 +256,17 @@
 					const auth0Client = await auth0.createAuth0Client({
 						domain: "rittor-music-dev.jp.auth0.com",
 						clientId: "YqJvsG9ITMx8duXhLUPHmZj7aUoCt369",
-						authorizationParams: {
-							redirect_uri: window.location.origin
-						}
 					});
 					// console.dir(auth0Client);
 
 					// ログイン
 					loginButton.addEventListener('click', (e) => {
 						e.preventDefault();
-						auth0Client.loginWithRedirect();
+						auth0Client.loginWithRedirect({
+							authorizationParams: {
+								redirect_uri: window.location.origin
+							}
+						});
 						console.log('login');
 					});
 
