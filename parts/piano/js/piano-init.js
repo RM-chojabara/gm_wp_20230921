@@ -8,7 +8,7 @@ if (location.href.includes('https://st.guitarmagazine.jp/')) {
   tp.push(["setSandbox", true]);
   tp.push(["setUseTinypassAccounts", false]);
   tp.push(["setUsePianoIdUserProvider", true]);
-} else if (location.href.includes('.local')) {
+} else if (location.href.includes('https://gm-st-new')) {
   // auth0 sandbox
   console.log('auth0 sandbox');
   tp.push(["setAid", "kcIxJRMlsu"]);
@@ -66,7 +66,7 @@ if (location.href.includes('https://st.guitarmagazine.jp/')) {
   // テスト環境
   (function (src) { var a = document.createElement("script"); a.type = "text/javascript"; a.async = true; a.src = src; var b = document.getElementsByTagName("script")[0]; b.parentNode.insertBefore(a, b) })("https://sandbox.tinypass.com/xbuilder/experience/load?aid=5Cp4t1hysu");
 
-} else if (location.href.includes('.local')) {
+} else if (location.href.includes('https://gm-st-new')) {
   // auth0 sandbox
   (function(src){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=src;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})("https://sandbox.tinypass.com/xbuilder/experience/load?aid=kcIxJRMlsu");
 } else {
