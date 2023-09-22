@@ -262,7 +262,7 @@
 					// console.dir(auth0Client);
 
 					// ログイン
-					if(location.pathname === '/login'){
+					if(location.pathname.includes('/login/')){
 						auth0Client.loginWithRedirect();
 						return;
 					}
