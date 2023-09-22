@@ -235,7 +235,7 @@
 			<?php // auth0 cdk ?>
 			<script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
 
-			<a href="/login"> login </a>
+			<a href="/login" style="display: block; width: 320px; height: 60px; line-height: 60px; text-align: center; border: 1px solid; margin: 20px;"> login </a>
 
 			<div id="is_login">
 				<div>
