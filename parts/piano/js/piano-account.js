@@ -26,13 +26,14 @@
   /**
  * ログイン処理
  */
-  if (location.pathname === "/login/") {
+  loginButtons.forEach(el => el.addEventListener('click', (e) => {
+    e.preventDefault();
     auth0Client.loginWithRedirect({
       authorizationParams: {
-        redirect_uri: window.location.origin  + '/my-account'
+        redirect_uri: window.location.origin + '/my-account'
       }
     });
-  }
+  }));
 
   /**
    * ログアウト処理
