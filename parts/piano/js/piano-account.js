@@ -3,90 +3,62 @@
  * ピアノ初期設定
 */
 
+(async function () {
+  const loginButtons = document.querySelectorAll(`.js-PianoLoginBtn`);
+  const logoutButtons = document.querySelectorAll(`.js-PianoLogoutBtn`);
+  const registerButtons = document.querySelectorAll(`.js-PianoRegisterBtn`);
+  const loginBlock = document.querySelectorAll('.js-PianoLoginBlock');
+  const accountBlock = document.querySelectorAll('.js-PianoAccountBlock');
+  // console.log(loginButtons, logoutButtons, registerButtons, loginBlock, accountBlock);
 
-//タグをPianoに送信
-// tp.push(["setTags", contents]);
-// tp.push(["setTags", ["article", "subscribers_only"]]);
+  const auth0Client = await auth0.createAuth0Client({
+    domain: "login-dev.rittor-music.co.jp",
+    clientId: "YqJvsG9ITMx8duXhLUPHmZj7aUoCt369",
+  });
+  console.log('auth0Client');
 
-window.tpAccount = window.tpAccount || {};
-
-// elements
-tpAccount = {
-  loginBlocks: document.querySelectorAll('.js-PianoLoginBlock'),
-  accountBlocks: document.querySelectorAll('.js-PianoAccountBlock'),
-  btns: {
-    login: document.querySelectorAll(`.js-PianoLoginBtn`),
-    logout: document.querySelectorAll(`.js-PianoLogoutBtn`),
-    register: document.querySelectorAll(`.js-PianoRegisterBtn`),
+  // 特定のページの場合、リダイレクト処理
+  if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
+    await auth0Client.handleRedirectCallback();
+    window.history.replaceState({}, document.title, "/");
   }
-}
 
-// 関数
-tpAccount.styleSwitch = function (target, flg = true) {
-  target.style.display = flg ? "block" : "none";
-};
-
-/**
- * ログイン中、マイページボタンを表示
-*/
-tpAccount.accountBlockShow = function () {
-  this.accountBlocks.forEach(el => this.styleSwitch(el));
-  this.loginBlocks.forEach(el => this.styleSwitch(el, false));
-}
-
-/**
- * 未ログイン中、ログインボタンを表示
-*/
-tpAccount.loginBlockShow = function () {
-  this.accountBlocks.forEach(el => this.styleSwitch(el, false));
-  this.loginBlocks.forEach(el => this.styleSwitch(el));
-}
-
-// 各ボタンのイベント処理関数
-tpAccount.btnsAction = function (btns, action) {
-  if (btns.length == 0 || btns == null) return;
-  btns.forEach(btn => btn.addEventListener('click', action));
-}
-
-
-tp.push([
-  'init',
-  function () {
-    tp.experience.init();
-
-    // header表示ボタンの切り替え
-    const accountBtnsSwitch = function () {
-      (tp.user.isUserValid())
-      ? tpAccount.accountBlockShow() //ログイン中
-      : tpAccount.loginBlockShow(); //未ログイン
-    }
-    accountBtnsSwitch(); // 読み込まれた時にボタンの表示を切り替える
-
-    // ログアウト処理
-    const logoutAction = (function () {
-      const callBack = tp.pianoId.logout.bind(null, () => {
-        accountBtnsSwitch();
-        location.href = '/';
-      });
-
-      tpAccount.btnsAction(tpAccount.btns.logout, callBack);
-    })();
-
-    // ログイン処理
-    const loginAction = (function () {
-      tpAccount.btnsAction(tpAccount.btns.login, () => {
-        tp.pianoId.show({ screen: "login", loggedIn: accountBtnsSwitch()});
-      })
-    })();
-
-    // 新規登録処理
-    const registerAction = (function () {
-      tpAccount.btnsAction(tpAccount.btns.register, () => {
-        tp.pianoId.show({ screen: "register", loggedIn: accountBtnsSwitch() });
-      });
-    })();
+  /**
+ * ログイン処理
+ */
+  if (location.pathname === "/login/") {
+    auth0Client.loginWithRedirect({
+      authorizationParams: {
+        redirect_uri: window.location.origin  + '/my-account'
+      }
+    });
   }
-]);
+
+  /**
+   * ログアウト処理
+   */
+  logoutButtons.forEach(el => el.addEventListener('click', (e) => {
+    e.preventDefault();
+    auth0Client.logout()
+  }));
+
+
+  /**
+   * ログイン中の判定
+   */
+  const isAuthenticated = await auth0Client.isAuthenticated();
+  console.log('isAuthenticated', isAuthenticated);
+
+  if (isAuthenticated) {
+    // ログイン中
+    loginBlock.forEach(el => el.style.display = "none");
+    accountBlock.forEach(el => el.style.display = "block");
+  } else {
+    // 未ログイン
+    loginBlock.forEach(el => el.style.display = "block");
+    accountBlock.forEach(el => el.style.display = "none");
+  }
+})();
 
 
 // タグの判定
@@ -151,37 +123,6 @@ tp.push([
         if (tp.user.isUserValid())
           tpAccount.accountBlockShow() //ログイン中
       }
-
-      // アンケートフォームの表示
-      // registrationSuccess
-      // loginSuccess
-      // if (eventData.event === "successDOI" || eventData.event === "startCheckout") {
-      //   console.log('Display Show');
-
-      //   if (tp.user.isUserValid()) { // ログイン済みかどうか
-      //     // アンケート表示コールバック お気に入りデータがなければアンケート表示
-      //     const callBack = function (data) {
-      //       let flg = false;
-
-      //       for (var i in data.custom_field_values) {
-      //         var fieldName = data.custom_field_values[i].field_name;
-      //         var fieldValue = data.custom_field_values[i].value;
-
-      //         if (fieldName == 'favorite_brand1') {
-      //           if (!fieldValue) fieldValue = [];
-      //           if (fieldValue || fieldValue.length > 0) flg = true;
-      //         }
-      //       }
-
-      //       if (!flg) return tp.pianoId.showForm({ formName: 'initialForm' });
-      //     }
-
-      //     tp.pianoId.loadExtendedUser({
-      //       extendedUserLoaded: function(data) { callBack(data)},
-      //       formName: 'initialForm'
-      //     });
-      //   }
-      // }
 
       // 完了画面の表示
       if (eventData.event === "profileUpdated") {

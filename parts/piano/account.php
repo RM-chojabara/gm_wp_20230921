@@ -72,9 +72,14 @@
 
 							<div id="piano-login-container" class="piano-login-container">
 								<span class="js-PianoLoginBlock" style="display:none;">
+								<?php /*
 									<button id="js-PianoLoginBtn" class="js-PianoLoginBtn">
 										<span class="hidden-769-1099">GM会員ログイン</span><i class="fas fa-sign-in-alt"></i>
 									</button>
+									*/ ?>
+									<a id="js-PianoLoginBtn" class="js-PianoLoginBtn" href="/login/">
+										<span class="hidden-769-1099">GM会員ログイン</span><i class="fas fa-sign-in-alt"></i>
+									</a>
 								</span>
 
 								<span class="js-PianoAccountBlock" style="display:none;">

@@ -40,6 +40,8 @@
 
 		<?php // ピアノ初期化 ?>
 		<script type="text/javascript" src="https://tsekino.demo.piano.io/wp-includes/js/jquery/jquery.js?ver=1.12.3"></script>
+		<?php // auth0 cdk todo ?>
+		<script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
 
 
 		<?php // drop Google Analytics Here ?>
@@ -229,76 +231,3 @@
 					</div>
 				</div>
 			</header>
-
-
-
-			<?php // auth0 cdk ?>
-			<script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
-
-			<a href="/login" style="display: block; width: 320px; height: 60px; line-height: 60px; text-align: center; border: 1px solid; margin: 20px;"> login </a>
-
-			<div id="is_login">
-				<div>
-					<button id="auth0-logout">auth0 logout</button>
-				</div>
-				<div>
-					マイページ
-					<div id="profile"></div>
-				</div>
-			</div>
-
-			<script type="text/javascript">
-				( async function(){
-					const isLoginArea = document.getElementById('is_login');
-					const logoutButton = document.getElementById('auth0-logout');
-
-					const auth0Client = await auth0.createAuth0Client({
-						domain: "login-dev.rittor-music.co.jp",
-						clientId: "YqJvsG9ITMx8duXhLUPHmZj7aUoCt369",
-						authorizationParams: {
-							redirect_uri: window.location.origin
-						}
-					});
-					// console.dir(auth0Client);
-
-					// ログイン
-					if(location.pathname.includes('/login/')){
-						auth0Client.loginWithRedirect();
-						return;
-					}
-
-					if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
-						await auth0Client.handleRedirectCallback();
-						window.history.replaceState({}, document.title, "/");
-					}
-
-					// ログアウト
-					logoutButton.addEventListener('click', (e) => {
-						e.preventDefault();
-						auth0Client.logout();
-						console.log('logout');
-					});
-
-					// マイページ
-					const isAuthenticated = await auth0Client.isAuthenticated();
-					console.log('isAuthenticated', isAuthenticated);
-					const userProfile = await auth0Client.getUser();
-
-					// Assumes an element with id "profile" in the DOM
-
-					if (isAuthenticated) {
-						const profileElement = document.getElementById("profile");
-						isLoginArea.style.display = "block";
-						profileElement.innerHTML = `
-										<p>${userProfile.name}</p>
-										<img src="${userProfile.picture}" />
-									`;
-						console.log('login now');
-					} else {
-						isLoginArea.style.display = "none";
-						console.log('not login');
-					}
-
-					console.log('auth0 cdk scripts');
-				})();
-			</script>
