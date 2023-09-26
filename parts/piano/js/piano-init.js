@@ -61,15 +61,82 @@ script.setAttribute( "src" , "//www.npttech.com/advertising.js" );
 script.setAttribute( "onerror" , "setNptTechAdblockerCookie(true);" );
 document.getElementsByTagName("head")[0].appendChild(script);
 
+(async function () {
+  const auth0Client = await auth0.createAuth0Client({
+    domain: "login-dev.rittor-music.co.jp",
+    clientId: "YqJvsG9ITMx8duXhLUPHmZj7aUoCt369",
+  });
+  console.log('auth0Client');
 
-if (location.href.includes('https://st.guitarmagazine.jp/')) {
-  // テスト環境
-  (function (src) { var a = document.createElement("script"); a.type = "text/javascript"; a.async = true; a.src = src; var b = document.getElementsByTagName("script")[0]; b.parentNode.insertBefore(a, b) })("https://sandbox.tinypass.com/xbuilder/experience/load?aid=5Cp4t1hysu");
+  // 特定のページの場合、リダイレクト処理
+  if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
+    await auth0Client.handleRedirectCallback();
+    window.history.replaceState({}, document.title, "/");
+  }
 
-} else if (location.href.includes('https://gm-st-new')) {
-  // auth0 sandbox
-  (function(src){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=src;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})("https://sandbox.tinypass.com/xbuilder/experience/load?aid=kcIxJRMlsu");
-} else {
-  // 本番環境
-  (function(src){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=src;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})("https://experience-ap.piano.io/xbuilder/experience/load?aid=QVaB3Ceypj");
-}
+  /**
+   * ログイン中の判定
+   */
+  const isAuthenticated = await auth0Client.isAuthenticated();
+  console.log('isAuthenticated', isAuthenticated);
+
+  if (isAuthenticated) {
+    const token = await auth0Client.getIdTokenClaims();
+    console.log('token', token.__raw);
+
+    tp.push(["setExternalJWT", token.__raw]);
+  }
+
+
+  window.addEventListener("load", async () => {
+    const loginButtons = document.querySelectorAll(`.js-PianoLoginBtn`);
+    const logoutButtons = document.querySelectorAll(`.js-PianoLogoutBtn`);
+    const registerButtons = document.querySelectorAll(`.js-PianoRegisterBtn`);
+    const loginBlock = document.querySelectorAll('.js-PianoLoginBlock');
+    const accountBlock = document.querySelectorAll('.js-PianoAccountBlock');
+    // console.log(loginButtons, logoutButtons, registerButtons, loginBlock, accountBlock);
+
+    /**
+     * ログイン処理
+     */
+    loginButtons.forEach(el => el.addEventListener('click', (e) => {
+      e.preventDefault();
+      auth0Client.loginWithRedirect({
+        authorizationParams: {
+          redirect_uri: window.location.origin + '/my-account'
+        }
+      });
+    }));
+
+    /**
+     * ログアウト処理
+     */
+    logoutButtons.forEach(el => el.addEventListener('click', (e) => {
+      e.preventDefault();
+      auth0Client.logout()
+    }));
+
+
+    if (isAuthenticated) {
+      // ログイン中
+      loginBlock.forEach(el => el.style.display = "none");
+      accountBlock.forEach(el => el.style.display = "block");
+    } else {
+      // 未ログイン
+      loginBlock.forEach(el => el.style.display = "block");
+      accountBlock.forEach(el => el.style.display = "none");
+    }
+  });
+  
+  if (location.href.includes('https://st.guitarmagazine.jp/')) {
+    // テスト環境
+    (function (src) { var a = document.createElement("script"); a.type = "text/javascript"; a.async = true; a.src = src; var b = document.getElementsByTagName("script")[0]; b.parentNode.insertBefore(a, b) })("https://sandbox.tinypass.com/xbuilder/experience/load?aid=5Cp4t1hysu");
+
+  } else if (location.href.includes('https://gm-st-new')) {
+    // auth0 sandbox
+    (function(src){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=src;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})("https://sandbox.tinypass.com/xbuilder/experience/load?aid=kcIxJRMlsu");
+  } else {
+    // 本番環境
+    (function(src){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=src;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})("https://experience-ap.piano.io/xbuilder/experience/load?aid=QVaB3Ceypj");
+  }
+})();
