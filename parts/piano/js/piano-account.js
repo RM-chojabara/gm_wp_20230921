@@ -22,15 +22,15 @@
   const isAuthenticated = await auth0Client.isAuthenticated();
   console.log('isAuthenticated', isAuthenticated);
 
-  if (isAuthenticated) {
-    const token = await auth0Client.getTokenSilently();
-    console.log('token', token);
+  // if (isAuthenticated) {
+  //   const token = await auth0Client.getTokenSilently();
+  //   console.log('token', token);
 
-    tp.push(["setExternalJWT", token]);
-  }
+  //   tp.push(["setExternalJWT", token]);
+  // }
 
 
-  window.addEventListener("DOMContentLoaded", async () => {
+  // window.addEventListener("DOMContentLoaded", async () => {
     const loginButtons = document.querySelectorAll(`.js-PianoLoginBtn`);
     const logoutButtons = document.querySelectorAll(`.js-PianoLogoutBtn`);
     const registerButtons = document.querySelectorAll(`.js-PianoRegisterBtn`);
@@ -68,7 +68,7 @@
       loginBlock.forEach(el => el.style.display = "block");
       accountBlock.forEach(el => el.style.display = "none");
     }
-  });
+  // });
 })();
 
 
