@@ -68,12 +68,6 @@ document.getElementsByTagName("head")[0].appendChild(script);
   });
   console.log('auth0Client');
 
-  // 特定のページの場合、リダイレクト処理
-  if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
-    await auth0Client.handleRedirectCallback();
-    window.history.replaceState({}, document.title, "/");
-  }
-
   /**
    * ログイン中の判定
    */
@@ -103,7 +97,7 @@ document.getElementsByTagName("head")[0].appendChild(script);
       e.preventDefault();
       auth0Client.loginWithRedirect({
         authorizationParams: {
-          redirect_uri: window.location.origin + '/my-account'
+          redirect_uri: window.location.origin + '/member_plans/'
         }
       });
     }));
@@ -117,6 +111,24 @@ document.getElementsByTagName("head")[0].appendChild(script);
     }));
 
 
+    // function accountBlockShow() {
+    //   accountBlock.forEach(el => el.style.display = "block");
+    //   loginBlock.forEach(el => el.style.display = "none");
+    // }
+
+    /**
+     * 新規無料登録
+     */
+    registerButtons.forEach(el => el.addEventListener('click', () => {
+      console.log('register')
+      // tp.pianoId.show({ screen: "register", loggedIn: accountBlockShow() });
+      tp.pianoId.show({
+        screen: "register", loggedIn: function () {
+          console.log('register success');
+      } });
+    }));
+
+
     if (isAuthenticated) {
       // ログイン中
       loginBlock.forEach(el => el.style.display = "none");
@@ -126,8 +138,14 @@ document.getElementsByTagName("head")[0].appendChild(script);
       loginBlock.forEach(el => el.style.display = "block");
       accountBlock.forEach(el => el.style.display = "none");
     }
+
+    // 特定のページの場合、リダイレクト処理
+    if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
+      await auth0Client.handleRedirectCallback();
+      window.history.replaceState({}, document.title, "/");
+    }
   });
-  
+
   if (location.href.includes('https://st.guitarmagazine.jp/')) {
     // テスト環境
     (function (src) { var a = document.createElement("script"); a.type = "text/javascript"; a.async = true; a.src = src; var b = document.getElementsByTagName("script")[0]; b.parentNode.insertBefore(a, b) })("https://sandbox.tinypass.com/xbuilder/experience/load?aid=5Cp4t1hysu");
