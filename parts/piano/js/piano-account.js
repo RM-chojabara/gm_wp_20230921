@@ -4,13 +4,6 @@
 */
 
 (async function () {
-  const loginButtons = document.querySelectorAll(`.js-PianoLoginBtn`);
-  const logoutButtons = document.querySelectorAll(`.js-PianoLogoutBtn`);
-  const registerButtons = document.querySelectorAll(`.js-PianoRegisterBtn`);
-  const loginBlock = document.querySelectorAll('.js-PianoLoginBlock');
-  const accountBlock = document.querySelectorAll('.js-PianoAccountBlock');
-  // console.log(loginButtons, logoutButtons, registerButtons, loginBlock, accountBlock);
-
   const auth0Client = await auth0.createAuth0Client({
     domain: "login-dev.rittor-music.co.jp",
     clientId: "YqJvsG9ITMx8duXhLUPHmZj7aUoCt369",
@@ -24,41 +17,58 @@
   }
 
   /**
- * ログイン処理
- */
-  loginButtons.forEach(el => el.addEventListener('click', (e) => {
-    e.preventDefault();
-    auth0Client.loginWithRedirect({
-      authorizationParams: {
-        redirect_uri: window.location.origin + '/my-account'
-      }
-    });
-  }));
-
-  /**
-   * ログアウト処理
-   */
-  logoutButtons.forEach(el => el.addEventListener('click', (e) => {
-    e.preventDefault();
-    auth0Client.logout()
-  }));
-
-
-  /**
    * ログイン中の判定
    */
   const isAuthenticated = await auth0Client.isAuthenticated();
   console.log('isAuthenticated', isAuthenticated);
 
   if (isAuthenticated) {
-    // ログイン中
-    loginBlock.forEach(el => el.style.display = "none");
-    accountBlock.forEach(el => el.style.display = "block");
-  } else {
-    // 未ログイン
-    loginBlock.forEach(el => el.style.display = "block");
-    accountBlock.forEach(el => el.style.display = "none");
+    const token = await auth0Client.getTokenSilently();
+    console.log('token', token);
+
+    tp.push(["setExternalJWT", token]);
   }
+
+
+  window.addEventListener("DOMContentLoaded", async () => {
+    const loginButtons = document.querySelectorAll(`.js-PianoLoginBtn`);
+    const logoutButtons = document.querySelectorAll(`.js-PianoLogoutBtn`);
+    const registerButtons = document.querySelectorAll(`.js-PianoRegisterBtn`);
+    const loginBlock = document.querySelectorAll('.js-PianoLoginBlock');
+    const accountBlock = document.querySelectorAll('.js-PianoAccountBlock');
+    // console.log(loginButtons, logoutButtons, registerButtons, loginBlock, accountBlock);
+
+    /**
+     * ログイン処理
+     */
+    loginButtons.forEach(el => el.addEventListener('click', (e) => {
+      e.preventDefault();
+      auth0Client.loginWithRedirect({
+        authorizationParams: {
+          redirect_uri: window.location.origin + '/my-account'
+        }
+      });
+    }));
+
+    /**
+     * ログアウト処理
+     */
+    logoutButtons.forEach(el => el.addEventListener('click', (e) => {
+      e.preventDefault();
+      auth0Client.logout()
+    }));
+
+
+    if (isAuthenticated) {
+      // ログイン中
+      loginBlock.forEach(el => el.style.display = "none");
+      accountBlock.forEach(el => el.style.display = "block");
+    } else {
+      // 未ログイン
+      loginBlock.forEach(el => el.style.display = "block");
+      accountBlock.forEach(el => el.style.display = "none");
+    }
+  });
 })();
 
 
