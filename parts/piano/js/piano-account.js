@@ -54,9 +54,8 @@ tp.push([
       }
     }
 
-
     window.addEventListener('message', (e) => {
-      if (!e.data || typeof e.data != "string" ) return
+      if (!e.data || typeof e.data != "string" || e.data === "_grecaptcha_ready") return
       const eventData = JSON.parse(e.data);
       // console.log(eventData.event);
 

@@ -68,6 +68,13 @@ document.getElementsByTagName("head")[0].appendChild(script);
   });
   console.log('auth0Client');
 
+  // 特定のページの場合、リダイレクト処理
+  if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
+    console.log('周回処理');
+    await auth0Client.handleRedirectCallback();
+    window.history.replaceState({}, document.title, "/");
+  }
+
   /**
    * ログイン中の判定
    */
@@ -124,7 +131,7 @@ document.getElementsByTagName("head")[0].appendChild(script);
       // tp.pianoId.show({ screen: "register", loggedIn: accountBlockShow() });
       tp.pianoId.show({
         screen: "register", loggedIn: function () {
-          console.log('register success');
+          alert('無料会員登録が完了しました。');
       } });
     }));
 
@@ -137,12 +144,6 @@ document.getElementsByTagName("head")[0].appendChild(script);
       // 未ログイン
       loginBlock.forEach(el => el.style.display = "block");
       accountBlock.forEach(el => el.style.display = "none");
-    }
-
-    // 特定のページの場合、リダイレクト処理
-    if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
-      await auth0Client.handleRedirectCallback();
-      window.history.replaceState({}, document.title, "/");
     }
   });
 
