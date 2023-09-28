@@ -55,26 +55,36 @@ tp.push([
     }
 
     window.addEventListener('message', (e) => {
-      if (!e.data || typeof e.data != "string" || e.data === "_grecaptcha_ready") return
-      const eventData = JSON.parse(e.data);
-      // console.log(eventData.event);
+      if (!e.data || typeof e.data != "string") return
 
-      if (eventData.event === "loginSuccess"
-        || eventData.event === "registrationSuccess"
-        || eventData.event === "closed") {
-        if (tp.user.isUserValid())
-          tpAccount.accountBlockShow() //ログイン中
-      }
+      try {
+        const eventData = JSON.parse(e.data);
+        // console.log(eventData.event);
 
-      // 完了画面の表示
-      if (eventData.event === "profileUpdated") {
-        // alert('更新 2');
-        if (location.href.includes('https://st.guitarmagazine.jp/')) {
-          tp.template.show({templateId: 'OT30ZZ65STZX'});
-        } else {
-          tp.template.show({templateId: 'OTNDPQ6GHZV7'});
+        if (eventData.event === "loginSuccess"
+          || eventData.event === "registrationSuccess"
+          || eventData.event === "closed") {
+          if (tp.user.isUserValid())
+            tpAccount.accountBlockShow() //ログイン中
         }
-        // console.log("閉じた!");
+
+        // 完了画面の表示
+        if (eventData.event === "profileUpdated") {
+          // alert('更新 2');
+          if (location.href.includes('https://st.guitarmagazine.jp/')) {
+            tp.template.show({ templateId: 'OT30ZZ65STZX' });
+
+          } else if (location.href.includes('https://gm-st-new')) {
+            tp.template.show({ templateId: 'OTSEFT69FVTJ' });
+
+          } else {
+            tp.template.show({templateId: 'OTNDPQ6GHZV7'});
+          }
+          // console.log("閉じた!");
+        }
+      } catch (error) {
+        console.error("Invalid JSON format:", e.data);
+        return;
       }
     });
   }

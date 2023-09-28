@@ -132,6 +132,7 @@ document.getElementsByTagName("head")[0].appendChild(script);
       tp.pianoId.show({
         screen: "register", loggedIn: function () {
           alert('無料会員登録が完了しました。');
+          tp.pianoId.showForm({ formName:'initialForm', templateId:'OT6KFVJWHN20' });
       } });
     }));
 
@@ -146,16 +147,17 @@ document.getElementsByTagName("head")[0].appendChild(script);
       accountBlock.forEach(el => el.style.display = "none");
     }
   });
-
-  if (location.href.includes('https://st.guitarmagazine.jp/')) {
-    // テスト環境
-    (function (src) { var a = document.createElement("script"); a.type = "text/javascript"; a.async = true; a.src = src; var b = document.getElementsByTagName("script")[0]; b.parentNode.insertBefore(a, b) })("https://sandbox.tinypass.com/xbuilder/experience/load?aid=5Cp4t1hysu");
-
-  } else if (location.href.includes('https://gm-st-new')) {
-    // auth0 sandbox
-    (function(src){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=src;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})("https://sandbox.tinypass.com/xbuilder/experience/load?aid=kcIxJRMlsu");
-  } else {
-    // 本番環境
-    (function(src){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=src;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})("https://experience-ap.piano.io/xbuilder/experience/load?aid=QVaB3Ceypj");
-  }
 })();
+
+
+if (location.href.includes('https://st.guitarmagazine.jp/')) {
+  // テスト環境
+  (function (src) { var a = document.createElement("script"); a.type = "text/javascript"; a.async = true; a.src = src; var b = document.getElementsByTagName("script")[0]; b.parentNode.insertBefore(a, b) })("https://sandbox.tinypass.com/xbuilder/experience/load?aid=5Cp4t1hysu");
+
+} else if (location.href.includes('https://gm-st-new')) {
+  // auth0 sandbox
+  (function(src){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=src;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})("https://sandbox.tinypass.com/xbuilder/experience/load?aid=kcIxJRMlsu");
+} else {
+  // 本番環境
+  (function(src){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=src;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})("https://experience-ap.piano.io/xbuilder/experience/load?aid=QVaB3Ceypj");
+}
