@@ -70,9 +70,8 @@ document.getElementsByTagName("head")[0].appendChild(script);
 
   // 特定のページの場合、リダイレクト処理
   if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
-    console.log('周回処理');
     await auth0Client.handleRedirectCallback();
-    window.history.replaceState({}, document.title, "/");
+    window.history.replaceState({}, document.title, location.pathname);
   }
 
   /**
@@ -100,11 +99,13 @@ document.getElementsByTagName("head")[0].appendChild(script);
     /**
      * ログイン処理
      */
+    const loginURL = window.location.origin + '/member_plans/';
+
     loginButtons.forEach(el => el.addEventListener('click', (e) => {
       e.preventDefault();
       auth0Client.loginWithRedirect({
         authorizationParams: {
-          redirect_uri: window.location.origin + '/member_plans/'
+          redirect_uri: loginURL
         }
       });
     }));
