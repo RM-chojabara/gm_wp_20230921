@@ -61,93 +61,31 @@ script.setAttribute( "src" , "//www.npttech.com/advertising.js" );
 script.setAttribute( "onerror" , "setNptTechAdblockerCookie(true);" );
 document.getElementsByTagName("head")[0].appendChild(script);
 
+
+
 (async function () {
-  const auth0Client = await auth0.createAuth0Client({
-    domain: "login-dev.rittor-music.co.jp",
-    clientId: "YqJvsG9ITMx8duXhLUPHmZj7aUoCt369",
-  });
-  console.log('auth0Client');
-
-  // 特定のページの場合、リダイレクト処理
-  if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
-    await auth0Client.handleRedirectCallback();
-    window.history.replaceState({}, document.title, location.pathname);
-  }
-
-  /**
-   * ログイン中の判定
-   */
-  const isAuthenticated = await auth0Client.isAuthenticated();
-  console.log('isAuthenticated', isAuthenticated);
-
-  if (isAuthenticated) {
-    const token = await auth0Client.getIdTokenClaims();
-    console.log('token', token.__raw);
-
-    tp.push(["setExternalJWT", token.__raw]);
-  }
-
-
-  window.addEventListener("load", async () => {
-    const loginButtons = document.querySelectorAll(`.js-PianoLoginBtn`);
-    const logoutButtons = document.querySelectorAll(`.js-PianoLogoutBtn`);
-    const registerButtons = document.querySelectorAll(`.js-PianoRegisterBtn`);
-    const loginBlock = document.querySelectorAll('.js-PianoLoginBlock');
-    const accountBlock = document.querySelectorAll('.js-PianoAccountBlock');
-    // console.log(loginButtons, logoutButtons, registerButtons, loginBlock, accountBlock);
-
-    /**
-     * ログイン処理
-     */
-    const loginURL = window.location.origin + '/member_plans/';
-
-    loginButtons.forEach(el => el.addEventListener('click', (e) => {
-      e.preventDefault();
-      auth0Client.loginWithRedirect({
-        authorizationParams: {
-          redirect_uri: loginURL
-        }
+  if (location.pathname === '/member_plans/') {
+    try {
+      const auth0Client = await auth0.createAuth0Client({
+        domain: "login-dev.rittor-music.co.jp",
+        clientId: "YqJvsG9ITMx8duXhLUPHmZj7aUoCt369",
       });
-    }));
+      console.log('auth0Client');
 
-    /**
-     * ログアウト処理
-     */
-    logoutButtons.forEach(el => el.addEventListener('click', (e) => {
-      e.preventDefault();
-      auth0Client.logout()
-    }));
+      if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
+        await auth0Client.handleRedirectCallback();
+        window.history.replaceState({}, document.title, location.pathname);
+      }
 
+      const token = await auth0Client.getIdTokenClaims();
+      if(typeof token === 'undefined') throw new Error('token is undefined');
+      console.log('token');
 
-    // function accountBlockShow() {
-    //   accountBlock.forEach(el => el.style.display = "block");
-    //   loginBlock.forEach(el => el.style.display = "none");
-    // }
-
-    /**
-     * 新規無料登録
-     */
-    registerButtons.forEach(el => el.addEventListener('click', () => {
-      console.log('register')
-      // tp.pianoId.show({ screen: "register", loggedIn: accountBlockShow() });
-      tp.pianoId.show({
-        screen: "register", loggedIn: function () {
-          alert('無料会員登録が完了しました。');
-          tp.pianoId.showForm({ formName:'initialForm', templateId:'OT6KFVJWHN20' });
-      } });
-    }));
-
-
-    if (isAuthenticated) {
-      // ログイン中
-      loginBlock.forEach(el => el.style.display = "none");
-      accountBlock.forEach(el => el.style.display = "block");
-    } else {
-      // 未ログイン
-      loginBlock.forEach(el => el.style.display = "block");
-      accountBlock.forEach(el => el.style.display = "none");
+      tp.push(["setExternalJWT", token.__raw]);
+    } catch (err) {
+      console.log('err', err);
     }
-  });
+  }
 })();
 
 
@@ -162,3 +100,70 @@ if (location.href.includes('https://st.guitarmagazine.jp/')) {
   // 本番環境
   (function(src){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=src;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})("https://experience-ap.piano.io/xbuilder/experience/load?aid=QVaB3Ceypj");
 }
+
+
+window.addEventListener("DOMContentLoaded", async () => {
+  const loginButtons = document.querySelectorAll(`.js-PianoLoginBtn`);
+  const logoutButtons = document.querySelectorAll(`.js-PianoLogoutBtn`);
+  const registerButtons = document.querySelectorAll(`.js-PianoRegisterBtn`);
+  const loginBlock = document.querySelectorAll('.js-PianoLoginBlock');
+  const accountBlock = document.querySelectorAll('.js-PianoAccountBlock');
+  // console.log(loginButtons, logoutButtons, registerButtons, loginBlock, accountBlock);
+
+  const auth0Client = await auth0.createAuth0Client({
+    domain: "login-dev.rittor-music.co.jp",
+    clientId: "YqJvsG9ITMx8duXhLUPHmZj7aUoCt369",
+  });
+  console.log('DOM after auth0Client');
+
+    /**
+   * ログイン中の判定
+   */
+  const isAuthenticated = await auth0Client.isAuthenticated();
+  // console.log('isAuthenticated', isAuthenticated);
+
+  if (isAuthenticated) {
+    // ログイン中
+    loginBlock.forEach(el => el.style.display = "none");
+    accountBlock.forEach(el => el.style.display = "block");
+  } else {
+    // 未ログイン
+    loginBlock.forEach(el => el.style.display = "block");
+    accountBlock.forEach(el => el.style.display = "none");
+  }
+
+  /**
+   * ログイン処理
+   */
+  const loginURL = window.location.origin + '/member_plans/';
+
+  loginButtons.forEach(el => el.addEventListener('click', (e) => {
+    e.preventDefault();
+    auth0Client.loginWithRedirect({
+      authorizationParams: {
+        redirect_uri: loginURL
+      }
+    });
+  }));
+
+  /**
+   * ログアウト処理
+   */
+  logoutButtons.forEach(el => el.addEventListener('click', (e) => {
+    e.preventDefault();
+    auth0Client.logout()
+  }));
+
+
+  /**
+   * 新規無料登録
+   */
+  registerButtons.forEach(el => el.addEventListener('click', () => {
+    console.log('register')
+    tp.pianoId.show({
+      screen: "register", loggedIn: function () {
+        alert('無料会員登録が完了しました。');
+        tp.pianoId.showForm({ formName:'initialForm', templateId:'OT6KFVJWHN20' });
+    } });
+  }));
+});

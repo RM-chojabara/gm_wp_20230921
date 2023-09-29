@@ -64,8 +64,13 @@ tp.push([
         if (eventData.event === "loginSuccess"
           || eventData.event === "registrationSuccess"
           || eventData.event === "closed") {
-          if (tp.user.isUserValid())
-            tpAccount.accountBlockShow() //ログイン中
+          if (tp.user.isUserValid()) {
+            document.querySelectorAll('.js-PianoLoginBlock')
+            .forEach(el => el.style.display = "block");
+            document.querySelectorAll('.js-PianoAccountBlock')
+            .forEach(el => el.style.display = "none");;
+          }
+
         }
 
         // 完了画面の表示
