@@ -78,9 +78,6 @@ if (location.href.includes('https://st.guitarmagazine.jp/')) {
 window.addEventListener("DOMContentLoaded", async () => {
   const loginButtons = document.querySelectorAll(`.js-PianoLoginBtn`);
   const logoutButtons = document.querySelectorAll(`.js-PianoLogoutBtn`);
-  const registerButtons = document.querySelectorAll(`.js-PianoRegisterBtn`);
-  const loginBlock = document.querySelectorAll('.js-PianoLoginBlock');
-  const accountBlock = document.querySelectorAll('.js-PianoAccountBlock');
   // console.log(loginButtons, logoutButtons, registerButtons, loginBlock, accountBlock);
 
   const auth0Client = await auth0.createAuth0Client({
@@ -89,27 +86,10 @@ window.addEventListener("DOMContentLoaded", async () => {
   });
   console.log('DOM after auth0Client');
 
-    /**
-   * ログイン中の判定
-   */
-  const isAuthenticated = await auth0Client.isAuthenticated();
-  console.log('isAuthenticated', isAuthenticated, "user", tp.user);
-
-  if (isAuthenticated) {
-    // ログイン中
-    loginBlock.forEach(el => el.style.display = "none");
-    accountBlock.forEach(el => el.style.display = "block");
-  } else {
-    // 未ログイン
-    loginBlock.forEach(el => el.style.display = "block");
-    accountBlock.forEach(el => el.style.display = "none");
-  }
-
   /**
    * ログイン処理
    */
   const loginURL = window.location.origin + '/member_plans/';
-
   loginButtons.forEach(el => el.addEventListener('click', (e) => {
     e.preventDefault();
     auth0Client.loginWithRedirect({
@@ -126,17 +106,4 @@ window.addEventListener("DOMContentLoaded", async () => {
     e.preventDefault();
     auth0Client.logout()
   }));
-
-
-  // /**
-  //  * 新規無料登録
-  //  */
-  // registerButtons.forEach(el => el.addEventListener('click', () => {
-  //   console.log('register')
-  //   tp.pianoId.show({
-  //     screen: "register", loggedIn: function () {
-  //       alert('無料会員登録が完了しました。');
-  //       tp.pianoId.showForm({ formName:'initialForm', templateId:'OT6KFVJWHN20' });
-  //   } });
-  // }));
 });
