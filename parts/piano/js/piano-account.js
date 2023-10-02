@@ -66,11 +66,10 @@ tp.push([
           || eventData.event === "closed") {
           if (tp.user.isUserValid()) {
             document.querySelectorAll('.js-PianoLoginBlock')
-            .forEach(el => el.style.display = "block");
+            .forEach(el => el.style.display = "none");
             document.querySelectorAll('.js-PianoAccountBlock')
-            .forEach(el => el.style.display = "none");;
+            .forEach(el => el.style.display = "block");;
           }
-
         }
 
         // 完了画面の表示

@@ -62,33 +62,6 @@ script.setAttribute( "onerror" , "setNptTechAdblockerCookie(true);" );
 document.getElementsByTagName("head")[0].appendChild(script);
 
 
-
-(async function () {
-  if (location.pathname === '/member_plans/') {
-    try {
-      const auth0Client = await auth0.createAuth0Client({
-        domain: "login-dev.rittor-music.co.jp",
-        clientId: "YqJvsG9ITMx8duXhLUPHmZj7aUoCt369",
-      });
-      console.log('auth0Client');
-
-      if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
-        await auth0Client.handleRedirectCallback();
-        window.history.replaceState({}, document.title, location.pathname);
-      }
-
-      const token = await auth0Client.getIdTokenClaims();
-      if(typeof token === 'undefined') throw new Error('token is undefined');
-      console.log('token');
-
-      tp.push(["setExternalJWT", token.__raw]);
-    } catch (err) {
-      console.log('err', err);
-    }
-  }
-})();
-
-
 if (location.href.includes('https://st.guitarmagazine.jp/')) {
   // テスト環境
   (function (src) { var a = document.createElement("script"); a.type = "text/javascript"; a.async = true; a.src = src; var b = document.getElementsByTagName("script")[0]; b.parentNode.insertBefore(a, b) })("https://sandbox.tinypass.com/xbuilder/experience/load?aid=5Cp4t1hysu");
@@ -120,7 +93,7 @@ window.addEventListener("DOMContentLoaded", async () => {
    * ログイン中の判定
    */
   const isAuthenticated = await auth0Client.isAuthenticated();
-  // console.log('isAuthenticated', isAuthenticated);
+  console.log('isAuthenticated', isAuthenticated, "user", tp.user);
 
   if (isAuthenticated) {
     // ログイン中
@@ -155,15 +128,15 @@ window.addEventListener("DOMContentLoaded", async () => {
   }));
 
 
-  /**
-   * 新規無料登録
-   */
-  registerButtons.forEach(el => el.addEventListener('click', () => {
-    console.log('register')
-    tp.pianoId.show({
-      screen: "register", loggedIn: function () {
-        alert('無料会員登録が完了しました。');
-        tp.pianoId.showForm({ formName:'initialForm', templateId:'OT6KFVJWHN20' });
-    } });
-  }));
+  // /**
+  //  * 新規無料登録
+  //  */
+  // registerButtons.forEach(el => el.addEventListener('click', () => {
+  //   console.log('register')
+  //   tp.pianoId.show({
+  //     screen: "register", loggedIn: function () {
+  //       alert('無料会員登録が完了しました。');
+  //       tp.pianoId.showForm({ formName:'initialForm', templateId:'OT6KFVJWHN20' });
+  //   } });
+  // }));
 });
