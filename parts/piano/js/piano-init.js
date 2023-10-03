@@ -1,48 +1,6 @@
 /**
  * ヘッドタグ下で読み込み
 */
-tp = window.tp || [];
-
-if (location.href.includes('https://st.guitarmagazine.jp/')) {
-  tp.push(["setAid", "5Cp4t1hysu"]);
-  tp.push(["setSandbox", true]);
-  tp.push(["setUseTinypassAccounts", false]);
-  tp.push(["setUsePianoIdUserProvider", true]);
-} else if (location.href.includes('https://gm-st-new')) {
-  // auth0 sandbox
-  console.log('auth0 sandbox');
-  tp.push(["setAid", "kcIxJRMlsu"]);
-  tp.push(["setSandbox", true]);
-  tp.push(["setUseTinypassAccounts", false]);
-  tp.push(["setUsePianoIdUserProvider", true]);
-} else {
-  tp.push(["setAid", 'QVaB3Ceypj']);
-  tp.push(["setUseTinypassAccounts", false ]);
-  tp.push(["setUsePianoIdUserProvider", true ]);
-}
-
-
-/**
- * メタタグデータをクローラーに渡す
- */
-var metas = document.getElementsByTagName('meta');
-var i, meta, property, content, contents = [];
-
-for (i = 0; i < metas.length; i++) {
-    meta = metas[i];
-    property = meta.getAttribute('property');
-    //metaから記事に設定されているタグを取得
-    if (property === 'article:tag') {
-        content = meta.getAttribute('content');
-        contents.push(content);
-        //タイアップ記事判定
-        // if (content === 'PR') {
-        //     tp.push(["setContentIsNative", true]);
-        // } else {
-        //     tp.push(["setContentIsNative", false]);
-        // }
-    }
-}
 
 /**
  * 広告ブロック検知
@@ -73,37 +31,3 @@ if (location.href.includes('https://st.guitarmagazine.jp/')) {
   // 本番環境
   (function(src){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=src;var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})("https://experience-ap.piano.io/xbuilder/experience/load?aid=QVaB3Ceypj");
 }
-
-
-window.addEventListener("DOMContentLoaded", async () => {
-  const loginButtons = document.querySelectorAll(`.js-PianoLoginBtn`);
-  const logoutButtons = document.querySelectorAll(`.js-PianoLogoutBtn`);
-  // console.log(loginButtons, logoutButtons, registerButtons, loginBlock, accountBlock);
-
-  const auth0Client = await auth0.createAuth0Client({
-    domain: "login-dev.rittor-music.co.jp",
-    clientId: "YqJvsG9ITMx8duXhLUPHmZj7aUoCt369",
-  });
-  console.log('DOM after auth0Client');
-
-  /**
-   * ログイン処理
-   */
-  const loginURL = window.location.origin + '/member_plans/';
-  loginButtons.forEach(el => el.addEventListener('click', (e) => {
-    e.preventDefault();
-    auth0Client.loginWithRedirect({
-      authorizationParams: {
-        redirect_uri: loginURL
-      }
-    });
-  }));
-
-  /**
-   * ログアウト処理
-   */
-  logoutButtons.forEach(el => el.addEventListener('click', (e) => {
-    e.preventDefault();
-    auth0Client.logout()
-  }));
-});

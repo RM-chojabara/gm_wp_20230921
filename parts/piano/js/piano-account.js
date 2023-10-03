@@ -3,38 +3,12 @@
  * ピアノ初期設定
 */
 
-
-// タグの判定
 tp = window["tp"] || [];
-var metas = document.getElementsByTagName("meta");
-var i,
-  meta,
-  property,
-  content,
-  contents = [];
-
-for (i = 0; i < metas.length; i++) {
-  meta = metas[i];
-  property = meta.getAttribute("property");
-  //metaから記事に設定されているタグを取得
-  if (property === "article:tag") {
-    content = meta.getAttribute("content");
-    contents.push(content);
-    //タイアップ記事判定
-    if (content === "PR") {
-      tp.push(["setContentIsNative", true]);
-    } else {
-      tp.push(["setContentIsNative", false]);
-    }
-  }
-}
-//タグをPianoに送信
-tp.push(["setTags", contents]);
 
 // アンケート表示
 tp.push([
   "init",
-  function () {
+  async function () {
     // リセットパスワードの呼び出し
     // Password can be reset only if user is anonymous
     if (!tp.user.isUserValid()) {
@@ -73,23 +47,97 @@ tp.push([
         }
 
         // 完了画面の表示
-        if (eventData.event === "profileUpdated") {
-          // alert('更新 2');
-          if (location.href.includes('https://st.guitarmagazine.jp/')) {
-            tp.template.show({ templateId: 'OT30ZZ65STZX' });
+        // if (eventData.event === "profileUpdated") {
+        //   // alert('更新 2');
+          // if (location.href.includes('https://st.guitarmagazine.jp/')) {
+          //   tp.template.show({ templateId: 'OT30ZZ65STZX' });
 
-          } else if (location.href.includes('https://gm-st-new')) {
-            tp.template.show({ templateId: 'OTSEFT69FVTJ' });
+          // } else if (location.href.includes('https://gm-st-new')) {
+          //   tp.template.show({ templateId: 'OTSEFT69FVTJ' });
 
-          } else {
-            tp.template.show({templateId: 'OTNDPQ6GHZV7'});
-          }
-          // console.log("閉じた!");
-        }
+          // } else {
+          //   tp.template.show({templateId: 'OTNDPQ6GHZV7'});
+          // }
+        //   // console.log("閉じた!");
+        // }
       } catch (error) {
         console.error("Invalid JSON format:", e.data);
         return;
       }
     });
+
+    const loginButtons = document.querySelectorAll(`.js-PianoLoginBtn`);
+    const logoutButtons = document.querySelectorAll(`.js-PianoLogoutBtn`);
+    // console.log(loginButtons, logoutButtons, registerButtons, loginBlock, accountBlock);
+
+    const auth0Client = await auth0.createAuth0Client({
+      domain: "login-dev.rittor-music.co.jp",
+      clientId: "YqJvsG9ITMx8duXhLUPHmZj7aUoCt369",
+    });
+    console.log('DOM after auth0Client');
+
+    const loginBlock = document.querySelectorAll('.js-PianoLoginBlock');
+    const accountBlock = document.querySelectorAll('.js-PianoAccountBlock');
+
+    if (tp.user.isUserValid()) {
+        // ログイン中
+        loginBlock.forEach(el => el.style.display = "none");
+        accountBlock.forEach(el => el.style.display = "block");
+    } else {
+        // 未ログイン
+        loginBlock.forEach(el => el.style.display = "block");
+        accountBlock.forEach(el => el.style.display = "none");
+    }
+
+    /**
+     * ログイン処理
+     */
+    const loginURL = window.location.origin + '/member_plans/';
+    loginButtons.forEach(el => el.addEventListener('click', (e) => {
+      e.preventDefault();
+      auth0Client.loginWithRedirect({
+        authorizationParams: {
+          redirect_uri: loginURL
+        }
+      });
+    }));
+
+    /**
+     * ログアウト処理
+     */
+    logoutButtons.forEach(el => el.addEventListener('click', (e) => {
+      e.preventDefault();
+      // auth0Client.logout()
+      tp.pianoId.logout(function () {
+        location.href = "/"
+      });
+    }));
   }
 ]);
+
+
+// タグの判定
+var metas = document.getElementsByTagName("meta");
+var i,
+  meta,
+  property,
+  content,
+  contents = [];
+
+for (i = 0; i < metas.length; i++) {
+  meta = metas[i];
+  property = meta.getAttribute("property");
+  //metaから記事に設定されているタグを取得
+  if (property === "article:tag") {
+    content = meta.getAttribute("content");
+    contents.push(content);
+    //タイアップ記事判定
+    if (content === "PR") {
+      tp.push(["setContentIsNative", true]);
+    } else {
+      tp.push(["setContentIsNative", false]);
+    }
+  }
+}
+//タグをPianoに送信
+tp.push(["setTags", contents]);
