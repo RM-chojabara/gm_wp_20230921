@@ -139,6 +139,8 @@ jQuery(document).ready(function ($) {
     $win = $(window),
       $main = $('#content'),
       $nav = $('#nav01'),
+      $alertBlock = $('#jQ-alert-text-wrap'),
+      $alertBlockHeight = $alertBlock.outerHeight() || 0,
       $hdImg = $('#header-image'),
       navHeight = $nav.outerHeight(),
       hdImgHeigt = $hdImg.outerHeight(),
@@ -147,7 +149,8 @@ jQuery(document).ready(function ($) {
 
     if (winW <= devW) {
       //SMART PHONE
-      $main.css('margin-top', hdImgHeigt);
+      // $main.css('margin-top', hdImgHeigt);
+      $main.css('margin-top', hdImgHeigt + alertBlockHeight);
     } else {
       //DESKTOP
       $win.on('load scroll', function () {

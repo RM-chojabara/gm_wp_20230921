@@ -115,6 +115,20 @@
 		<div class="page-wrapper"></div>
 		<div id="container">
 
+			<style>
+				.header-upper__alert-text {
+					background-color: #000;
+					color: #fff;
+					text-align: center;
+					padding: 10px 0;
+					font-size: 14px;
+					margin: 0;
+				}
+			</style>
+			<p class='header-upper__alert-text'>
+				2023年10月16日 0:00~24:00 <br>システムメンテナンスによりアクセスができなくなります。
+			</p>
+
 			<header id="main-header" class="header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
 
 				<div id="header-image">
