@@ -125,28 +125,20 @@
 					background-color: #000;
 					max-width: 100%;
 					overflow: hidden;
-					position: relative;
-					padding-top: 32px;
 				}
 
 				.header-upper__alert-text {
 					background-color: #000;
 					color: #fff;
 					padding: 6px 0 2px;
+					padding-left: 100%;
 					font-size: 12px;
 					font-weight: bold;
 					margin: 0;
 					display: inline-block;
 					white-space: nowrap;
-					overflow: hidden;
-					position: absolute;
-					left: 0;
-					top: -2px;
 				}
 				@media screen and (max-width: 767px) {
-					.header-upper__alert-text-wrap {
-						padding-top: 25px;
-					}
 					.header-upper__alert-text {
 						font-size: 10px;
 						line-height: 1.7;
@@ -154,37 +146,19 @@
 				}
 
 				.header-start-anime {
-					animation: startScrollText 30s linear infinite;
+					animation: startScrollText 20s linear infinite;
 					animation-play-state: paused;
-				}
-				.header-end-anime {
-					animation: endScrollText 60s linear infinite;
 				}
 
 				@media screen and (max-width: 767px) {
 					.header-start-anime {
-						animation: startScrollText 15s linear infinite;
+						animation: startScrollText 12s linear infinite;
 						animation-play-state: paused;
-					}
-					.header-end-anime {
-						animation: endScrollText 30s linear infinite;
 					}
 				}
 
 				@keyframes startScrollText {
 					0% {
-						transform: translateX(0%);
-					}
-					100% {
-						transform: translateX(-100%);
-					}
-				}
-
-				@keyframes endScrollText {
-					0% {
-						transform: translateX(100%);
-					}
-					50% {
 						transform: translateX(0%);
 					}
 					100% {
@@ -214,17 +188,10 @@
 							}, 3000);
 
 							alertTextTarget.addEventListener('animationiteration', () => {
-									if(alertTextTarget.classList.contains('header-start-anime')) {
-											alertTextTarget.classList.remove('header-start-anime');
-											alertTextTarget.classList.add('header-end-anime');
-									} else {
-										// アニメーションが1回繰り返された後の処理
-										alertTextTarget.style.animationPlayState = 'paused'; // アニメーションを一時停止
-
-										setTimeout(() => {
-												alertTextTarget.style.animationPlayState = 'running'; // アニメーションを再開
-										}, 4000); // 5秒後
-									}
+									// if(alertTextTarget.classList.contains('header-start-anime')) {
+									// 		alertTextTarget.classList.remove('header-start-anime');
+									// 		alertTextTarget.classList.add('header-end-anime');
+									// }
 							});
 						})();
 					</script>
