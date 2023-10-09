@@ -146,14 +146,12 @@
 				}
 
 				.header-start-anime {
-					animation: startScrollText 20s linear infinite;
-					animation-play-state: paused;
+					animation: startScrollText 30s linear infinite;
 				}
 
 				@media screen and (max-width: 767px) {
 					.header-start-anime {
-						animation: startScrollText 12s linear infinite;
-						animation-play-state: paused;
+						animation: startScrollText 20s linear infinite;
 					}
 				}
 
@@ -175,26 +173,6 @@
 						【重要】2023年10月16日（月）00:00〜24:00は、システム・メインテナンスのため、「WEBでギタマガ読み放題」の本棚へのアクセス、および全てのブックの閲覧ができなくなります。
 						</p>
 					</div>
-
-					<script type="text/javascript">
-						(function() {
-							// 画面の幅
-							const alertTextTarget = document.getElementById('js-upperAlertText'); // アラートテキスト
-							const textWidth = document.querySelector('.header-upper__alert-text').clientWidth; // テキストの幅
-							const windowWidth = window.innerWidth;
-
-							setTimeout(() => {
-									alertTextTarget.style.animationPlayState = 'running'; // アニメーションを開始
-							}, 3000);
-
-							alertTextTarget.addEventListener('animationiteration', () => {
-									// if(alertTextTarget.classList.contains('header-start-anime')) {
-									// 		alertTextTarget.classList.remove('header-start-anime');
-									// 		alertTextTarget.classList.add('header-end-anime');
-									// }
-							});
-						})();
-					</script>
 				<div id="header-image">
 					<div class="wrap cf">
 						<?php // to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> ?>
