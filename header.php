@@ -125,6 +125,8 @@
 					background-color: #000;
 					max-width: 100%;
 					overflow: hidden;
+					position: relative;
+					padding-top: 32px;
 				}
 
 				.header-upper__alert-text {
@@ -137,24 +139,44 @@
 					display: inline-block;
 					white-space: nowrap;
 					overflow: hidden;
-					position: relative;
-					animation: scrollText 30s linear infinite;
+					position: absolute;
+					left: 0;
+					top: -2px;
+				}
+				@media screen and (max-width: 767px) {
+					.header-upper__alert-text-wrap {
+						padding-top: 25px;
+					}
+					.header-upper__alert-text {
+						font-size: 10px;
+						line-height: 1.7;
+						animation-duration: 20s !important;
+					}
 				}
 
-				@keyframes scrollText {
+				.header-start-anime {
+					animation: startScrollText 30s linear infinite;
+					animation-play-state: paused;
+				}
+				@keyframes startScrollText {
 					0% {
-						transform: translateX(calc(100% + 100vw));
+						transform: translateX(0%);
 					}
 					100% {
 						transform: translateX(-100%);
 					}
 				}
 
-				@media screen and (max-width: 767px) {
-					.header-upper__alert-text {
-						font-size: 10px;
-						line-height: 1.7;
-						animation: scrollText 30s linear infinite; /* 10秒のスクロール */
+				.header-end-anime {
+					animation: endScrollText 30s linear infinite;
+				}
+
+				@keyframes endScrollText {
+					0% {
+						transform: translateX(calc(-100% + 100vw));
+					}
+					100% {
+						transform: translateX(0%);
 					}
 				}
 			</style>
@@ -163,10 +185,32 @@
 					<?php /*
 					*/  ?>
 					<div id="jQ-alert-text-wrap" class='header-upper__alert-text-wrap'>
-						<p class='header-upper__alert-text pc'>
+						<p id="js-upperAlertText" class='header-upper__alert-text header-start-anime'>
 						【重要】2023年10月16日（月）00:00〜24:00は、システム・メインテナンスのため、「WEBでギタマガ読み放題」の本棚へのアクセス、および全てのブックの閲覧ができなくなります。
 						</p>
 					</div>
+
+					<script type="text/javascript">
+						(function() {
+							// 画面の幅
+							const alertTextTarget = document.getElementById('js-upperAlertText'); // アラートテキスト
+							const textWidth = document.querySelector('.header-upper__alert-text').clientWidth; // テキストの幅
+							const windowWidth = window.innerWidth;
+
+							setTimeout(() => {
+									alertTextTarget.style.animationPlayState = 'running'; // アニメーションを開始
+							}, 3000);
+
+							// alertTextTarget.addEventListener('animationiteration', () => {
+							// 		// アニメーションが1回繰り返された後の処理
+							// 		alertTextTarget.style.animationPlayState = 'paused'; // アニメーションを一時停止
+
+							// 		setTimeout(() => {
+							// 				alertTextTarget.style.animationPlayState = 'running'; // アニメーションを再開
+							// 		}, 4000); // 5秒後
+							// });
+						})();
+					</script>
 				<div id="header-image">
 					<div class="wrap cf">
 						<?php // to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> ?>
