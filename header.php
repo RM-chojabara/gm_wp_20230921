@@ -123,6 +123,8 @@
 			<style>
 				.header-upper__alert-text-wrap {
 					background-color: #000;
+					max-width: 100%;
+					overflow: hidden;
 				}
 
 				.header-upper__alert-text {
@@ -136,7 +138,7 @@
 					white-space: nowrap;
 					overflow: hidden;
 					position: relative;
-					animation: scrollText 20s linear infinite;
+					animation: scrollText 30s linear infinite;
 				}
 
 				@keyframes scrollText {
@@ -152,7 +154,7 @@
 					.header-upper__alert-text {
 						font-size: 10px;
 						line-height: 1.7;
-						animation: scrollText 10s linear infinite; /* 10秒のスクロール */
+						animation: scrollText 30s linear infinite; /* 10秒のスクロール */
 					}
 				}
 			</style>
@@ -162,7 +164,7 @@
 					*/  ?>
 					<div id="jQ-alert-text-wrap" class='header-upper__alert-text-wrap'>
 						<p class='header-upper__alert-text pc'>
-							2023年10月16日 0:00~24:00 システムメンテナンスによりアクセスができなくなります。
+						【重要】2023年10月16日（月）00:00〜24:00は、システム・メインテナンスのため、「WEBでギタマガ読み放題」の本棚へのアクセス、および全てのブックの閲覧ができなくなります。
 						</p>
 					</div>
 				<div id="header-image">
