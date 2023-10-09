@@ -115,22 +115,56 @@
 		<div class="page-wrapper"></div>
 		<div id="container">
 
+			<?php /* 2023/10/5 変更ファイル
+				header.php(以下にスタイルとアラート文HTMLを追加)
+				library/js/script.js
+				library/js/min/script.min.js
+			*/ ?>
 			<style>
+				.header-upper__alert-text-wrap {
+					background-color: #000;
+				}
+
 				.header-upper__alert-text {
 					background-color: #000;
 					color: #fff;
-					text-align: center;
-					padding: 10px 0;
-					font-size: 14px;
+					padding: 6px 0 2px;
+					font-size: 12px;
+					font-weight: bold;
 					margin: 0;
+					display: inline-block;
+					white-space: nowrap;
+					overflow: hidden;
+					position: relative;
+					animation: scrollText 20s linear infinite;
+				}
+
+				@keyframes scrollText {
+					0% {
+						transform: translateX(calc(100% + 100vw));
+					}
+					100% {
+						transform: translateX(-100%);
+					}
+				}
+
+				@media screen and (max-width: 767px) {
+					.header-upper__alert-text {
+						font-size: 10px;
+						line-height: 1.7;
+						animation: scrollText 10s linear infinite; /* 10秒のスクロール */
+					}
 				}
 			</style>
-			<p class='header-upper__alert-text'>
-				2023年10月16日 0:00~24:00 <br>システムメンテナンスによりアクセスができなくなります。
-			</p>
 
-			<header id="main-header" class="header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
-
+				<header id="main-header" class="header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
+					<?php /*
+					*/  ?>
+					<div id="jQ-alert-text-wrap" class='header-upper__alert-text-wrap'>
+						<p class='header-upper__alert-text pc'>
+							2023年10月16日 0:00~24:00 システムメンテナンスによりアクセスができなくなります。
+						</p>
+					</div>
 				<div id="header-image">
 					<div class="wrap cf">
 						<?php // to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> ?>
