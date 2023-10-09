@@ -150,7 +150,6 @@
 					.header-upper__alert-text {
 						font-size: 10px;
 						line-height: 1.7;
-						animation-duration: 20s !important;
 					}
 				}
 
@@ -158,6 +157,20 @@
 					animation: startScrollText 30s linear infinite;
 					animation-play-state: paused;
 				}
+				.header-end-anime {
+					animation: endScrollText 60s linear infinite;
+				}
+
+				@media screen and (max-width: 767px) {
+					.header-start-anime {
+						animation: startScrollText 15s linear infinite;
+						animation-play-state: paused;
+					}
+					.header-end-anime {
+						animation: endScrollText 30s linear infinite;
+					}
+				}
+
 				@keyframes startScrollText {
 					0% {
 						transform: translateX(0%);
@@ -167,16 +180,15 @@
 					}
 				}
 
-				.header-end-anime {
-					animation: endScrollText 30s linear infinite;
-				}
-
 				@keyframes endScrollText {
 					0% {
-						transform: translateX(calc(-100% + 100vw));
+						transform: translateX(100%);
+					}
+					50% {
+						transform: translateX(0%);
 					}
 					100% {
-						transform: translateX(0%);
+						transform: translateX(-100%);
 					}
 				}
 			</style>
@@ -201,14 +213,19 @@
 									alertTextTarget.style.animationPlayState = 'running'; // アニメーションを開始
 							}, 3000);
 
-							// alertTextTarget.addEventListener('animationiteration', () => {
-							// 		// アニメーションが1回繰り返された後の処理
-							// 		alertTextTarget.style.animationPlayState = 'paused'; // アニメーションを一時停止
+							alertTextTarget.addEventListener('animationiteration', () => {
+									if(alertTextTarget.classList.contains('header-start-anime')) {
+											alertTextTarget.classList.remove('header-start-anime');
+											alertTextTarget.classList.add('header-end-anime');
+									} else {
+										// アニメーションが1回繰り返された後の処理
+										alertTextTarget.style.animationPlayState = 'paused'; // アニメーションを一時停止
 
-							// 		setTimeout(() => {
-							// 				alertTextTarget.style.animationPlayState = 'running'; // アニメーションを再開
-							// 		}, 4000); // 5秒後
-							// });
+										setTimeout(() => {
+												alertTextTarget.style.animationPlayState = 'running'; // アニメーションを再開
+										}, 4000); // 5秒後
+									}
+							});
 						})();
 					</script>
 				<div id="header-image">
