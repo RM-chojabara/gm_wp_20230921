@@ -68,6 +68,7 @@ tp.push([
 
     const loginButtons = document.querySelectorAll(`.js-PianoLoginBtn`);
     const logoutButtons = document.querySelectorAll(`.js-PianoLogoutBtn`);
+    const registerButtons = document.querySelectorAll(`.js-PianoRegisterBtn`);
     // console.log(loginButtons, logoutButtons, registerButtons, loginBlock, accountBlock);
 
     const auth0Client = await auth0.createAuth0Client({
@@ -111,6 +112,82 @@ tp.push([
       tp.pianoId.logout(function () {
         location.href = "/"
       });
+    }));
+
+  /**
+   * 無料新規登録
+   */
+    const ESP_SITE_ID = '1010'; // ESPのサイトID
+    const ESP_MLID = '6085'; // ESPのメーリングリストID
+
+    const mailingLists = [ { fieldName: 'weekly_newsletter', mlid: ESP_MLID } ];
+    function registerUserToMLs(mlids) {
+        const API_URL = 'https://sandbox-api-esp.piano.io';
+        const SITE_ID = ESP_SITE_ID;
+        var body = {email: tp.pianoId.getUser().email, sqids: mlids};
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', API_URL + '/tracker/lucid/sub/' + SITE_ID, true);
+        xhr.setRequestHeader('Content-type', 'application/json');
+        xhr.send(JSON.stringify(body));
+        console.log("registerUserToMLs");
+    }
+
+    // メールの同意を確認
+    // fieldNameがチェックされていれば、対象のIDをmlidsに追加
+    function checkEmailConsent() {
+        tp.pianoId.loadExtendedUser({
+            extendedUserLoaded: function (data) {
+                var mlids = [];
+                for (var i in data.custom_field_values) {
+                    var fieldName = data.custom_field_values[i].field_name;
+                    var fieldValue = data.custom_field_values[i].value;
+                    console.log(fieldName, fieldValue);
+                    if (fieldValue) {
+                        for (var j in mailingLists) {
+                                if (fieldName === mailingLists[j].fieldName) {
+                                    mlids.push(mailingLists[j].mlid);
+                                    break;
+                                }
+                        }
+                    }
+                }
+                // IDがあればメーリングリストへ登録
+                if (mlids.length > 0) { registerUserToMLs(mlids); }
+            },
+            formName: "newsletterFields"
+        });
+    }
+
+    registerButtons.forEach(el => el.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      if (tp.user.isUserValid()) {
+        tp.pianoId.show({
+          screen: "register", loggedIn: function () {
+            // アンケートの表示
+            tp.pianoId.showForm({ formName: 'initialForm', templateId: 'OT6KFVJWHN20' });
+
+            // メッセージを受け取ったら処理を実行
+            window.addEventListener("message", function (event) {
+              if (event.data) {
+                try {
+                  var data = JSON.parse(event.data);
+                  if (data.event == "profileUpdated") {
+                    console.log("profileUpdated");
+                    checkEmailConsent();
+                  }
+                } catch (e) { }
+              }
+            });
+          }
+        });
+      } else {
+        auth0Client.loginWithRedirect({
+          authorizationParams: {
+            redirect_uri: loginURL
+          }
+        });
+      }
     }));
   }
 ]);
