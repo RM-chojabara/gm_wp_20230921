@@ -1,0 +1,221 @@
+<script>
+	(async function () {
+		// ESP接続のための設定
+		window.PianoESPConfig = { id: 2157 }; // インテグレーションID
+		const ESP_SITE_ID = "1994"; // ESPのサイトID
+		const ESP_MLID = "5632"; // ESPのメーリングリストID
+		const auth0Domain = "login-stg.rittor-music.co.jp";
+		const auth0ClientID = "BWX1WsaIQ5O5woKxIIfeQZFqO6YDRUil";
+
+		tp = window["tp"] || [];
+
+		const mailingLists = [{ fieldName: "weekly_newsletter", mlid: ESP_MLID }];
+		function registerUserToMLs(mlids) {
+			const API_URL = "https://sandbox-api-esp.piano.io";
+			const SITE_ID = ESP_SITE_ID;
+			var body = { email: tp.pianoId.getUser().email, sqids: mlids };
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", API_URL + "/tracker/lucid/sub/" + SITE_ID, true);
+			xhr.setRequestHeader("Content-type", "application/json");
+			xhr.send(JSON.stringify(body));
+			console.log("registerUserToMLs");
+		}
+
+		// メールの同意を確認
+		// fieldNameがチェックされていれば、対象のIDをmlidsに追加
+		function checkEmailConsent() {
+			tp.pianoId.loadExtendedUser({
+				extendedUserLoaded: function (data) {
+					var mlids = [];
+					for (var i in data.custom_field_values) {
+						var fieldName = data.custom_field_values[i].field_name;
+						var fieldValue = data.custom_field_values[i].value;
+						console.log(fieldName, fieldValue);
+						if (fieldValue) {
+							for (var j in mailingLists) {
+								if (fieldName === mailingLists[j].fieldName) {
+									mlids.push(mailingLists[j].mlid);
+									break;
+								}
+							}
+						}
+					}
+					// IDがあればメーリングリストへ登録
+					if (mlids.length > 0) {
+						registerUserToMLs(mlids);
+					}
+				},
+				formName: "newsletterFields",
+			});
+		}
+
+		/* Checkout related */
+		/**
+		 * Event properties
+		 *
+		 * chargeAmount - amount of purchase
+		 * chargeCurrency
+		 * uid
+		 * email
+		 * expires
+		 * rid
+		 * startedAt
+		 * termConversionId
+		 * termId
+		 * promotionId
+		 * token_list
+		 * cookie_domain
+		 * user_token
+		 *
+		 */
+		function onCheckoutComplete(data) {}
+
+		function onCheckoutExternalEvent() {}
+
+		function onCheckoutClose(event) {
+			/* Default behavior is to refresh the page on successful checkout */
+			if (event && event.state == "checkoutCompleted") {
+				location.reload();
+			}
+		}
+
+		function onCheckoutCancel() {}
+
+		function onCheckoutError() {}
+
+		function onCheckoutSubmitPayment() {}
+
+		/* Meter callback */
+		function onMeterExpired() {}
+
+		/* Meter callback */
+		function onMeterActive() {}
+
+		/* Callback executed when a user must login */
+		function onLoginRequired() {
+			// this is a reference implementation only
+			// your own custom login/registration implementation would
+			// need to return the tinypass-compatible userRef inside the callback
+
+			// mysite.showLoginRegistration(function (tinypassUserRef)
+			// tp.push(["setUserRef", tinypassUserRef]); // tp.offer.startCheckout(params); // }
+			// this will prevent the tinypass error screen from displaying
+
+			return false;
+		}
+
+		/* Callback executed after a tinypassAccounts login */
+		function onLoginSuccess() {}
+
+		/* Callback executed after an experience executed successfully */
+		function onExperienceExecute(event) {}
+
+		/* Callback executed if experience execution has been failed */
+		function onExperienceExecutionFailed(event) {}
+
+		/* Callback executed if external checkout has been completed successfully */
+		function onExternalCheckoutComplete(event) {
+			/* Default behavior is to refresh the page on successful checkout */
+			location.reload();
+		}
+
+		tp.push(["setAid", "kcIxJRMlsu"]);
+		tp.push(["setEndpoint", "https://sandbox.tinypass.com/api/v3"]);
+		tp.push(["setPianoIdUrl", "https://sandbox.piano.io"]);
+		tp.push(["setEspEndpoint", "https://sandbox-api-esp.piano.io"]);
+		tp.push(["setUseTinypassAccounts", false]);
+		tp.push(["setUsePianoIdLiteUserProvider", true]);
+
+		/* checkout related events */
+		tp.push(["addHandler", "checkoutComplete", onCheckoutComplete]);
+		tp.push(["addHandler", "checkoutClose", onCheckoutClose]);
+		tp.push(["addHandler", "checkoutCustomEvent", onCheckoutExternalEvent]);
+		tp.push(["addHandler", "checkoutCancel", onCheckoutCancel]);
+		tp.push(["addHandler", "checkoutError", onCheckoutError]);
+		tp.push(["addHandler", "checkoutSubmitPayment", onCheckoutSubmitPayment]);
+
+		/* user login events */
+		tp.push(["addHandler", "loginRequired", onLoginRequired]);
+		tp.push(["addHandler", "loginSuccess", onLoginSuccess]);
+
+		/* meter related */
+		tp.push(["addHandler", "meterExpired", onMeterExpired]);
+		tp.push(["addHandler", "meterActive", onMeterActive]);
+
+		tp.push(["addHandler", "experienceExecute", onExperienceExecute]);
+		tp.push(["addHandler", "experienceExecutionFailed", onExperienceExecutionFailed]);
+
+		/* external checkout related events */
+		tp.push(["addHandler", "externalCheckoutComplete", onExternalCheckoutComplete]);
+
+		tp.push([
+			"init",
+			async function () {
+				const auth0Client = await auth0.createAuth0Client({
+					domain: auth0Domain,
+					clientId: auth0ClientID,
+				});
+				console.log("auth0Client");
+
+				if (location.pathname === "/member_plans/") {
+					try {
+						if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
+							await auth0Client.handleRedirectCallback();
+							window.history.replaceState({}, document.title, location.pathname);
+						}
+
+						const token = await auth0Client.getIdTokenClaims();
+						if (typeof token === "undefined") throw new Error("token is undefined");
+						console.log("token ok");
+
+						tp.push(["setExternalJWT", token.__raw]);
+
+						console.log("experience.init");
+						tp.experience.init();
+
+						tp.pianoId.show({
+							screen: "register",
+							loggedIn: function () {
+								console.log("loggedIn");
+								// アンケートの表示
+								tp.pianoId.showForm({ formName: "initialForm", templateId: "OT6KFVJWHN20" });
+
+								// メッセージを受け取ったら処理を実行
+								window.addEventListener("message", function (event) {
+									if (event.data) {
+										try {
+											var data = JSON.parse(event.data);
+											if (data.event == "profileUpdated") {
+												console.log("profileUpdated");
+												checkEmailConsent();
+												tp.template.show({ templateId: "OTSEFT69FVTJ" });
+											}
+										} catch (e) {}
+									}
+								});
+							},
+						});
+					} catch (err) {
+						console.log("err", err);
+					}
+				} else {
+					console.log("experience.init");
+					tp.experience.init();
+				}
+			},
+		]);
+	})();
+</script>
+<script>
+	// do not change this section
+	// |BEGIN INCLUDE TINYPASS JS|
+	(function (src) {
+		var a = document.createElement("script");
+		a.type = "text/javascript";
+		a.async = true;
+		a.src = src;
+		var b = document.getElementsByTagName("script")[0];
+		b.parentNode.insertBefore(a, b);
+	})("https://sandbox.tinypass.com/api/tinypass.min.js");
+	// |END   INCLUDE TINYPASS JS|
+</script>
