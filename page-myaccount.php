@@ -32,9 +32,10 @@
 										<i class="fas fa-sign-out-alt"></i>
 										<span>ギタマガ ログアウト</span>
 									</button>
-									<button class="js-PianoLogoutBtn piano-my-page__logout-button" data-id="auth">
-										<i class="fas fa-sign-out-alt"></i>
-										<span>リットーID ログアウト</span>
+
+									<button class="js-PianoLogoutBtn piano-my-page__logout-button auth-button" data-id="auth">
+										<img src="https://guitarmagazine.jp/wp-content/themes/guitarmagazine/parts/piano/img/logo-rm-id-white.svg" alt="">
+										<span>ログアウト</span>
 									</button>
 								</header>
 

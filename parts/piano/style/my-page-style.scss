@@ -43,4 +43,29 @@
         margin-right: 4px;
       }
   }
+
+  .piano-my-page__logout-button.auth-button  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 315px;
+    height: auto;
+    padding: 15px 20px;
+    background-color: #4672C6;
+    border: none;
+
+      & img {
+        width: 65%;
+        max-height: 25px;
+      }
+
+      & span {
+        width: 35%;
+        color: #FFF;
+        font-size: 17px;
+        text-align: left;
+        font-weight: bold;
+      }
+  }
 }
