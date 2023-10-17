@@ -167,12 +167,12 @@
 
 				<header id="main-header" class="header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
 					<?php /*
+						<div id="jQ-alert-text-wrap" class='header-upper__alert-text-wrap'>
+							<p id="js-upperAlertText" class='header-upper__alert-text header-start-anime'>
+							【重要】2023年10月16日（月）00:00〜24:00は、システム・メインテナンスのため、「WEBでギタマガ読み放題」の本棚へのアクセス、および全てのブックの閲覧ができなくなります。
+							</p>
+						</div>
 					*/  ?>
-					<div id="jQ-alert-text-wrap" class='header-upper__alert-text-wrap'>
-						<p id="js-upperAlertText" class='header-upper__alert-text header-start-anime'>
-						【重要】2023年10月16日（月）00:00〜24:00は、システム・メインテナンスのため、「WEBでギタマガ読み放題」の本棚へのアクセス、および全てのブックの閲覧ができなくなります。
-						</p>
-					</div>
 				<div id="header-image">
 					<div class="wrap cf">
 						<?php // to use a image just replace the bloginfo('name') with your img src and remove the surrounding <p> ?>

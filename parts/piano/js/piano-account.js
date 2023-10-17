@@ -108,8 +108,12 @@ tp.push([
      */
     logoutButtons.forEach(el => el.addEventListener('click', (e) => {
       e.preventDefault();
-      // auth0Client.logout()
+      if (e.currentTarget.dataset.id == "auth") {
+        console.log('auth0 logout');
+        auth0Client.logout();
+      }
       tp.pianoId.logout(function () {
+        console.log('piano logout');
         location.href = "/"
       });
     }));

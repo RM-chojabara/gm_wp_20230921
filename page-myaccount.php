@@ -30,7 +30,11 @@
 
 									<button class="js-PianoLogoutBtn piano-my-page__logout-button">
 										<i class="fas fa-sign-out-alt"></i>
-										<span>ログアウト</span>
+										<span>ギタマガ ログアウト</span>
+									</button>
+									<button class="js-PianoLogoutBtn piano-my-page__logout-button" data-id="auth">
+										<i class="fas fa-sign-out-alt"></i>
+										<span>リットーID ログアウト</span>
 									</button>
 								</header>
 
