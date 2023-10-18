@@ -82,7 +82,10 @@
 								</span>
 							</div>
 
-							<?php /* 有料プランのため一旦 コメントアウト */ ?>
-							<a href="https://backnumber.guitarmagazine.jp/" class="subscribe-gm"  target="_blank" rel="noopener noreferrer">
+							<?php /*
+									Piano & リブラの時のURL
+									https://backnumber.guitarmagazine.jp/
+							*/ ?>
+							<a href="https://guitarmagazine-test.sae.logosware.net" class="subscribe-gm"  target="_blank" rel="noopener noreferrer">
 								<span class="hidden-769-1099">ギタマガ読み放題</span><i class="fas fa-book"></i>
 							</a>
