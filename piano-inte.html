@@ -151,56 +151,57 @@
 		tp.push([
 			"init",
 			async function () {
-				const auth0Client = await auth0.createAuth0Client({
-					domain: auth0Domain,
-					clientId: auth0ClientID,
-				});
-				console.log("auth0Client");
+				try {
+					const auth0Client = await auth0.createAuth0Client({
+						domain: auth0Domain,
+						clientId: auth0ClientID,
+					});
+					console.log("auth0Client");
 
-				if (location.pathname === "/member_plans/") {
-					try {
-						if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
-							await auth0Client.handleRedirectCallback();
-							window.history.replaceState({}, document.title, location.pathname);
-						}
-
-						const token = await auth0Client.getIdTokenClaims();
-						if (typeof token === "undefined") throw new Error("token is undefined");
-						console.log("token ok");
-
-						tp.push(["setExternalJWT", token.__raw]);
-
-						console.log("experience.init");
-						tp.experience.init();
-
-						tp.pianoId.show({
-							screen: "register",
-							loggedIn: function () {
-								console.log("loggedIn");
-								// アンケートの表示
-								tp.pianoId.showForm({ formName: "initialForm", templateId: "OT6KFVJWHN20" });
-
-								// メッセージを受け取ったら処理を実行
-								window.addEventListener("message", function (event) {
-									if (event.data) {
-										try {
-											var data = JSON.parse(event.data);
-											if (data.event == "profileUpdated") {
-												console.log("profileUpdated");
-												checkEmailConsent();
-												tp.template.show({ templateId: "OTSEFT69FVTJ" });
-											}
-										} catch (e) {}
-									}
-								});
-							},
-						});
-					} catch (err) {
-						console.log("err", err);
+					if (location.search.includes("state=") && (location.search.includes("code=") || location.search.includes("error="))) {
+						await auth0Client.handleRedirectCallback();
+						window.history.replaceState({}, document.title, location.pathname);
 					}
-				} else {
-					console.log("experience.init");
+
+					const token = await auth0Client.getIdTokenClaims();
+					if (typeof token === "undefined") throw new Error("token is undefined");
+					console.log("token ok");
+
+					tp.push(["setExternalJWT", token.__raw]);
+
 					tp.experience.init();
+					console.log("experience.init");
+
+					if (tp.user.isUserValid()) {
+
+						const loginBlock = document.querySelectorAll('.js-PianoLoginBlock');
+    				const accountBlock = document.querySelectorAll('.js-PianoAccountBlock');
+						loginBlock.forEach(el => el.style.display = "none");
+      			accountBlock.forEach(el => el.style.display = "block");
+						console.log('login ok');
+
+						// if(location.pathname == "/member_plans/") {
+						// 	// アンケートの表示
+						// 	tp.pianoId.showForm({ formName: "initialForm", templateId: "OT6KFVJWHN20" });
+
+						// 	// メッセージを受け取ったら処理を実行
+						// 	window.addEventListener("message", function (event) {
+						// 		if (event.data) {
+						// 			try {
+						// 				var data = JSON.parse(event.data);
+						// 				if (data.event == "profileUpdated") {
+						// 					console.log("profileUpdated");
+						// 					checkEmailConsent();
+						// 					tp.template.show({ templateId: "OTSEFT69FVTJ" });
+						// 				}
+						// 			} catch (e) {}
+						// 		}
+						// 	});
+						// }
+					}
+
+				} catch (err) {
+					console.log("err", err);
 				}
 			},
 		]);
