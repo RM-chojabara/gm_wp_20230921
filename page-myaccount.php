@@ -43,17 +43,7 @@
 
 								<p style="text-align: center;"><a href="/law/" target="_blank" rel="noopener noreferrer">特定商取引に関する表示</a>はこちら</p>
 
-                <script type='text/javascript'>
-                  // // tp オブジェクトを取得します
-                  tp = window [ "tp" ] || [];
 
-                  tp.push([ "init" ,function() {
-                      tp.myaccount.show({
-                          displayMode: "inline" ,
-                          containerSelector: "#my-account"
-                      });
-                  }]);
-                </script>
 							</article>
 
 						</main>

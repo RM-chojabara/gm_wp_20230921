@@ -155,6 +155,7 @@
 					const auth0Client = await auth0.createAuth0Client({
 						domain: auth0Domain,
 						clientId: auth0ClientID,
+						cacheLocation: 'localstorage',
 					});
 					console.log("auth0Client");
 
@@ -177,33 +178,77 @@
 					tp.experience.init();
 					console.log("experience.init");
 
+					const loginBlock = document.querySelectorAll('.js-PianoLoginBlock');
+					const accountBlock = document.querySelectorAll('.js-PianoAccountBlock');
+
 					if (tp.user.isUserValid()) {
-						const loginBlock = document.querySelectorAll('.js-PianoLoginBlock');
-    				const accountBlock = document.querySelectorAll('.js-PianoAccountBlock');
+						// ログイン中
 						loginBlock.forEach(el => el.style.display = "none");
-      			accountBlock.forEach(el => el.style.display = "block");
-						console.log('login ok');
-
-						// if(location.pathname == "/member_plans/") {
-						// 	// アンケートの表示
-						// 	tp.pianoId.showForm({ formName: "initialForm", templateId: "OT6KFVJWHN20" });
-
-						// 	// メッセージを受け取ったら処理を実行
-						// 	window.addEventListener("message", function (event) {
-						// 		if (event.data) {
-						// 			try {
-						// 				var data = JSON.parse(event.data);
-						// 				if (data.event == "profileUpdated") {
-						// 					console.log("profileUpdated");
-						// 					checkEmailConsent();
-						// 					tp.template.show({ templateId: "OTSEFT69FVTJ" });
-						// 				}
-						// 			} catch (e) {}
-						// 		}
-						// 	});
-						// }
+						accountBlock.forEach(el => el.style.display = "block");
+					} else {
+						// 未ログイン
+						loginBlock.forEach(el => el.style.display = "block");
+						accountBlock.forEach(el => el.style.display = "none");
 					}
 
+					const loginButtons = document.querySelectorAll(`.js-PianoLoginBtn`);
+					const logoutButtons = document.querySelectorAll(`.js-PianoLogoutBtn`);
+					const registerButtons = document.querySelectorAll(`.js-PianoRegisterBtn`);
+					// console.log(loginButtons, logoutButtons, registerButtons, loginBlock, accountBlock);
+					/**
+					 * ログイン処理
+					 */
+					const loginURL = window.location.origin + '/member_plans/';
+					loginButtons.forEach(el => el.addEventListener('click', (e) => {
+						e.preventDefault();
+						auth0Client.loginWithRedirect({
+							authorizationParams: {
+								redirect_uri: loginURL
+							}
+						});
+					}));
+
+					/**
+					 * ログアウト処理
+					 */
+					logoutButtons.forEach(el => el.addEventListener('click', (e) => {
+						e.preventDefault();
+						if (e.currentTarget.dataset.id == "auth") {
+							console.log('auth0 logout');
+							auth0Client.logout();
+						}
+						tp.pianoId.logout(function () {
+							console.log('piano logout');
+							location.href = "/"
+						});
+					}));
+
+					/**
+					 * 登録処理
+					 */
+					registerButtons.forEach(el => el.addEventListener('click', (e) => {
+						e.preventDefault();
+
+						if (tp.user.isUserValid()) {
+							alert('既に登録ずみです');
+						} else {
+							auth0Client.loginWithRedirect({
+								authorizationParams: {
+									redirect_uri: loginURL
+								}
+							});
+						}
+					}));
+
+					/**
+					 * マイページの処理
+					 */
+					if(location.pathname == '/my-account/'){
+						tp.myaccount.show({
+								displayMode: "inline" ,
+								containerSelector: "#my-account"
+						});
+					}
 				} catch (err) {
 					console.log("err", err);
 				}
