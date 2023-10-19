@@ -164,7 +164,12 @@
 					}
 
 					const token = await auth0Client.getIdTokenClaims();
-					if (typeof token === "undefined") throw new Error("token is undefined");
+					if (typeof token === "undefined") {
+						tp.experience.init();
+						console.log("experience.init");
+						
+						throw new Error("token is undefined");
+					}
 					console.log("token ok");
 
 					tp.push(["setExternalJWT", token.__raw]);
