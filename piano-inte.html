@@ -167,18 +167,17 @@
 					if (typeof token === "undefined") {
 						tp.experience.init();
 						console.log("experience.init");
-						
+
 						throw new Error("token is undefined");
 					}
-					console.log("token ok");
 
 					tp.push(["setExternalJWT", token.__raw]);
+					console.log("token ok");
 
 					tp.experience.init();
 					console.log("experience.init");
 
 					if (tp.user.isUserValid()) {
-
 						const loginBlock = document.querySelectorAll('.js-PianoLoginBlock');
     				const accountBlock = document.querySelectorAll('.js-PianoAccountBlock');
 						loginBlock.forEach(el => el.style.display = "none");
