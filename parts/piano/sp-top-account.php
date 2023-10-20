@@ -5,17 +5,37 @@
 </style>
   <div class="cta-nav">
     <div class="cta-nav__list">
-      <li class="js-PianoLoginBlock cta-nav__item" style="display: none;">
-        <button type="button" class="js-PianoLoginBtn account-gm">GM会員ログイン<i class="fas fa-sign-in-alt"></i></button>
-      </li>
-      <li class="js-PianoAccountBlock cta-nav__item" style="display: none;">
-        <a href="/my-account" class="account-gm">マイページ<i class="far fa-user-circle"></i></a>
-      </li>
 
-      <?php /* 有料プランのため一旦 コメントアウト */ ?>
-        <li class="cta-nav__item">
-          <a href="https://backnumber.guitarmagazine.jp/" class="subscribe-gm" target="_blank" rel="noopener noreferrer">ギタマガ読み放題<i class="fas fa-book"></i></a>
-        </li>
+      <div class="js-PianoLoginBlock" style="display: none;" style="width: 100%;">
+        <div style="display: flex;">
+          <li class="cta-nav__item">
+            <button type="button" class="js-PianoLoginBtn account-gm">会員登録<i class="fas fa-sign-in-alt"></i></button>
+          </li>
+          <li class="cta-nav__item">
+            <button type="button" class="js-PianoLoginBtn account-gm">ログイン<i class="fas fa-sign-in-alt"></i></button>
+          </li>
+          <li class="cta-nav__item">
+            <a class="js-PianoLoginBtn subscribe-gm" >
+              読み放題
+              <i class="fas fa-book"></i>
+            </a>
+          </li>
+        </div>
+      </div>
 
+      <div class="js-PianoAccountBlock" style="display: none;" style="width: 100%;">
+        <div style="display: flex;">
+          <li class="cta-nav__item">
+            <a href="/my-account" class="account-gm">マイページ<i class="far fa-user-circle"></i></a>
+          </li>
+          <?php /* Piano & リブラの時のURL https://backnumber.guitarmagazine.jp/ */ ?>
+          <li class="cta-nav__item">
+            <a href="https://guitarmagazine-test.sae.logosware.net" class="subscribe-gm" target="_blank" rel="noopener noreferrer">
+              読み放題
+              <i class="fas fa-book"></i>
+            </a>
+          </li>
+        </div>
+      </div>
     </div>
   </div>

@@ -70,22 +70,40 @@
 								}
 							</style>
 
-							<div id="piano-login-container" class="piano-login-container">
-								<span class="js-PianoLoginBlock" style="display:none;">
-									<button id="js-PianoLoginBtn" class="js-PianoLoginBtn">
-										<span class="hidden-769-1099">GM会員ログイン</span><i class="fas fa-sign-in-alt"></i>
-									</button>
-								</span>
+							<div class="js-PianoLoginBlock" style="display:none;">
+								<div style="display: flex;">
+									<div id="piano-login-container" class="piano-login-container" style="display: flex;">
+										<span>
+											<button id="js-PianoLoginBtn" class="js-PianoLoginBtn">
+												<span class="hidden-769-1099">会員登録</span><i class="fas fa-sign-in-alt"></i>
+											</button>
+										</span>
 
-								<span class="js-PianoAccountBlock" style="display:none;">
-									<a href="/my-account"><span class="hidden-769-1099">マイページ</span><i class="far fa-user-circle fa-lg"></i></a>
-								</span>
+										<span>
+											<button id="js-PianoLoginBtn" class="js-PianoLoginBtn">
+												<span class="hidden-769-1099">ログイン</span><i class="fas fa-sign-in-alt"></i>
+											</button>
+										</span>
+									</div>
+
+									<a href="https://guitarmagazine-test.sae.logosware.net" class="subscribe-gm"  target="_blank" rel="noopener noreferrer">
+										<span class="hidden-769-1099">読み放題</span><i class="fas fa-book"></i>
+									</a>
+								</div>
 							</div>
 
-							<?php /*
-									Piano & リブラの時のURL
-									https://backnumber.guitarmagazine.jp/
-							*/ ?>
-							<a href="https://guitarmagazine-test.sae.logosware.net" class="subscribe-gm"  target="_blank" rel="noopener noreferrer">
-								<span class="hidden-769-1099">ギタマガ読み放題</span><i class="fas fa-book"></i>
-							</a>
+
+							<div class="js-PianoAccountBlock" style="display:none;">
+								<div style="display: flex;">
+									<div id="piano-login-container" class="piano-login-container">
+										<span>
+											<a href="/my-account"><span class="hidden-769-1099">マイページ</span><i class="far fa-user-circle fa-lg"></i></a>
+										</span>
+									</div>
+
+									<?php /* Piano & リブラの時のURL https://backnumber.guitarmagazine.jp/ */ ?>
+									<a href="https://guitarmagazine-test.sae.logosware.net" class="subscribe-gm"  target="_blank" rel="noopener noreferrer">
+										<span class="hidden-769-1099">読み放題</span><i class="fas fa-book"></i>
+									</a>
+								</div>
+							</div>
