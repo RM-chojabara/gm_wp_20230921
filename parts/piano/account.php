@@ -43,6 +43,11 @@
 									color: #000;
 								}
 
+								.header .piano-login-container-wrap,
+								.header .piano-login-container__flex {
+									display: flex;
+								}
+
 								@media screen and (max-width: 769px) {
 									.header .piano-login-container {
 											border: none;
@@ -61,22 +66,29 @@
 											padding: 1rem 0;
 											text-align: left;
 									}
+
+									.header .piano-login-container-wrap,
+									.header .piano-login-container__flex {
+										display: block;
+									}
 								}
 
 								@media screen and (max-width: 768px) {
 									.header a.subscribe-gm:visited {
 										color: #FFF;
 									}
+
+									.header .wrap nav { margin-top: 4rem; }
 								}
 							</style>
 
 							<div class="js-PianoLoginBlock" style="display:none;">
-								<div style="display: flex;">
-									<div id="piano-login-container" class="piano-login-container" style="display: flex;">
+								<div class="piano-login-container-wrap">
+									<div id="piano-login-container" class="piano-login-container piano-login-container__flex">
 										<span>
-											<button id="js-PianoLoginBtn" class="js-PianoLoginBtn">
+											<a href="https://login-stg.rittor-music.co.jp/u/signup?state=hKFo2SBKVFp2WEZ5N1NSSXN1QTBzdGxNNUhMMkNMZW1oaFVWN6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGxFcGhKT0VfbkZLcGdEWUNjNHZyNUR5XzRfQW4zS0Vio2NpZNkgdFkzWndMOG9tUDNGRU5VNmlyaVdwU3p5VVd4ajEwMTA" id="js-PianoLoginBtn" class="">
 												<span class="hidden-769-1099">会員登録</span><i class="fas fa-sign-in-alt"></i>
-											</button>
+											</a>
 										</span>
 
 										<span>
@@ -94,7 +106,7 @@
 
 
 							<div class="js-PianoAccountBlock" style="display:none;">
-								<div style="display: flex;">
+								<div class="piano-login-container-wrap">
 									<div id="piano-login-container" class="piano-login-container">
 										<span>
 											<a href="/my-account"><span class="hidden-769-1099">マイページ</span><i class="far fa-user-circle fa-lg"></i></a>

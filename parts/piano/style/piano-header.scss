@@ -94,7 +94,7 @@ $mg: .5rem;
 --------------------------------------------------*/
 .nav--sm-top {
     @media screen and (max-width: 768px) {
-        margin-top: $mg * 8 !important;
+        margin-top: $mg * 6 !important;
         position: absolute;
         top: 0;
         left: 0;

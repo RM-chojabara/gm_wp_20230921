@@ -116,7 +116,7 @@
 --------------------------------------------------*/
 @media screen and (max-width: 768px) {
   .nav--sm-top {
-    margin-top: 4rem !important;
+    margin-top: 3rem !important;
     position: absolute;
     top: 0;
     left: 0;
