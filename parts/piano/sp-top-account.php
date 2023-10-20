@@ -13,16 +13,16 @@
       <div class="js-PianoLoginBlock" style="display: none; width: 100%;">
         <div style="display: flex;">
           <li class="cta-nav__item">
-            <a href="https://login-stg.rittor-music.co.jp/u/signup?state=hKFo2SBKVFp2WEZ5N1NSSXN1QTBzdGxNNUhMMkNMZW1oaFVWN6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGxFcGhKT0VfbkZLcGdEWUNjNHZyNUR5XzRfQW4zS0Vio2NpZNkgdFkzWndMOG9tUDNGRU5VNmlyaVdwU3p5VVd4ajEwMTA" class="account-gm">会員登録<i class="fas fa-sign-in-alt"></i></a>
+            <a href="javascript:void(0);" onclick="signIn()" class="account-gm js-authRegisterBtn">会員登録<i class="fas fa-address-card"></i></a>
           </li>
           <li class="cta-nav__item">
             <button type="button" class="js-PianoLoginBtn account-gm">ログイン<i class="fas fa-sign-in-alt"></i></button>
           </li>
           <li class="cta-nav__item">
-            <a class="js-PianoLoginBtn subscribe-gm" >
+            <button class="js-PianoLoginBtn subscribe-gm" >
               読み放題
               <i class="fas fa-book"></i>
-            </a>
+            </button>
           </li>
         </div>
       </div>

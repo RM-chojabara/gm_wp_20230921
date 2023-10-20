@@ -86,8 +86,13 @@
 								<div class="piano-login-container-wrap">
 									<div id="piano-login-container" class="piano-login-container piano-login-container__flex">
 										<span>
-											<a href="https://login-stg.rittor-music.co.jp/u/signup?state=hKFo2SBKVFp2WEZ5N1NSSXN1QTBzdGxNNUhMMkNMZW1oaFVWN6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGxFcGhKT0VfbkZLcGdEWUNjNHZyNUR5XzRfQW4zS0Vio2NpZNkgdFkzWndMOG9tUDNGRU5VNmlyaVdwU3p5VVd4ajEwMTA" id="js-PianoLoginBtn" class="">
-												<span class="hidden-769-1099">会員登録</span><i class="fas fa-sign-in-alt"></i>
+											<script type="text/javascript">
+												function signIn (){
+													location.href = "https://login-stg.rittor-music.co.jp/u/signup?state=hKFo2SAtcGJybWtJQUNFbWswa3RUVE9ZSGJTVkhjZWpPLWxuV6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGc5d3d0RU04UFFjdzNwWVpzSFZUeHdoSEhLNDRkVnU5o2NpZNkgdFkzWndMOG9tUDNGRU5VNmlyaVdwU3p5VVd4ajEwMTA"
+												}
+											</script>
+											<a href="javascript:void(0);" class="" onclick="signIn()">
+												<span class="hidden-769-1099">会員登録</span><i class="fas fa-address-card"></i>
 											</a>
 										</span>
 
@@ -98,7 +103,7 @@
 										</span>
 									</div>
 
-									<a href="https://guitarmagazine-test.sae.logosware.net" class="subscribe-gm"  target="_blank" rel="noopener noreferrer">
+									<a href="javascript:void(0);" class="js-PianoLoginBtn subscribe-gm">
 										<span class="hidden-769-1099">読み放題</span><i class="fas fa-book"></i>
 									</a>
 								</div>
