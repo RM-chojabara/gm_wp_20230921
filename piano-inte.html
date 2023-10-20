@@ -191,6 +191,7 @@
 					const loginButtons = document.querySelectorAll(`.js-PianoLoginBtn`);
 					const logoutButtons = document.querySelectorAll(`.js-PianoLogoutBtn`);
 					const registerButtons = document.querySelectorAll(`.js-PianoRegisterBtn`);
+					const authRegisterButtons = document.querySelectorAll(`.js-PianoAuthRegisterBtn`);
 					// console.log(loginButtons, logoutButtons, registerButtons, loginBlock, accountBlock);
 					/**
 					 * ログイン処理
@@ -204,7 +205,7 @@
 							}
 						});
 					}
-					
+
 					loginButtons.forEach(el => el.addEventListener('click', (e) => {
 						e.preventDefault();
 						auth0Client.loginWithRedirect({
@@ -226,6 +227,19 @@
 						tp.pianoId.logout(function () {
 							console.log('piano logout');
 							location.href = "/"
+						});
+					}));
+
+					/**
+					 * auth 新規登録
+					 */
+					authRegisterButtons.forEach(el => el.addEventListener('click', (e) => {
+						e.preventDefault();
+						auth0Client.loginWithRedirect({
+							authorizationParams: {
+								redirect_uri: loginURL,
+								screen_hint: 'signup'
+							}
 						});
 					}));
 

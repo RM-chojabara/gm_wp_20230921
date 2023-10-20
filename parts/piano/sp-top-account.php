@@ -13,7 +13,8 @@
       <div class="js-PianoLoginBlock" style="display: none; width: 100%;">
         <div style="display: flex;">
           <li class="cta-nav__item">
-            <a href="javascript:void(0);" onclick="signIn()" class="account-gm js-authRegisterBtn">会員登録<i class="fas fa-address-card"></i></a>
+            <button class="account-gm js-PianoAuthRegisterBtn">会員登録<i class="fas fa-address-card"></i>
+            </button>
           </li>
           <li class="cta-nav__item">
             <button type="button" class="js-PianoLoginBtn account-gm">ログイン<i class="fas fa-sign-in-alt"></i></button>

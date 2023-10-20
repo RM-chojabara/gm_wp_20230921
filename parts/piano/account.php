@@ -86,14 +86,9 @@
 								<div class="piano-login-container-wrap">
 									<div id="piano-login-container" class="piano-login-container piano-login-container__flex">
 										<span>
-											<script type="text/javascript">
-												function signIn (){
-													location.href = "https://login-stg.rittor-music.co.jp/u/signup?state=hKFo2SAtcGJybWtJQUNFbWswa3RUVE9ZSGJTVkhjZWpPLWxuV6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGc5d3d0RU04UFFjdzNwWVpzSFZUeHdoSEhLNDRkVnU5o2NpZNkgdFkzWndMOG9tUDNGRU5VNmlyaVdwU3p5VVd4ajEwMTA"
-												}
-											</script>
-											<a href="javascript:void(0);" class="" onclick="signIn()">
+											<button class="js-PianoAuthRegisterBtn">
 												<span class="hidden-769-1099">会員登録</span><i class="fas fa-address-card"></i>
-											</a>
+											</button>
 										</span>
 
 										<span>
