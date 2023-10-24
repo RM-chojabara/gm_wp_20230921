@@ -2,52 +2,10 @@
 	(async function () {
 		// ESP接続のための設定
 		window.PianoESPConfig = { id: 1010 }; // インテグレーションID
-		const ESP_SITE_ID = "1010"; // ESPのサイトID
-		const ESP_MLID = "6085"; // ESPのメーリングリストID
 		const auth0Domain = "login-stg.rittor-music.co.jp";
 		const auth0ClientID = "BWX1WsaIQ5O5woKxIIfeQZFqO6YDRUil";
 
 		tp = window["tp"] || [];
-
-		const mailingLists = [{ fieldName: "weekly_newsletter", mlid: ESP_MLID }];
-		function registerUserToMLs(mlids) {
-			const API_URL = "https://sandbox-api-esp.piano.io";
-			const SITE_ID = ESP_SITE_ID;
-			var body = { email: tp.pianoId.getUser().email, sqids: mlids };
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", API_URL + "/tracker/lucid/sub/" + SITE_ID, true);
-			xhr.setRequestHeader("Content-type", "application/json");
-			xhr.send(JSON.stringify(body));
-			console.log("registerUserToMLs");
-		}
-
-		// メールの同意を確認
-		// fieldNameがチェックされていれば、対象のIDをmlidsに追加
-		function checkEmailConsent() {
-			tp.pianoId.loadExtendedUser({
-				extendedUserLoaded: function (data) {
-					var mlids = [];
-					for (var i in data.custom_field_values) {
-						var fieldName = data.custom_field_values[i].field_name;
-						var fieldValue = data.custom_field_values[i].value;
-						console.log(fieldName, fieldValue);
-						if (fieldValue) {
-							for (var j in mailingLists) {
-								if (fieldName === mailingLists[j].fieldName) {
-									mlids.push(mailingLists[j].mlid);
-									break;
-								}
-							}
-						}
-					}
-					// IDがあればメーリングリストへ登録
-					if (mlids.length > 0) {
-						registerUserToMLs(mlids);
-					}
-				},
-				formName: "newsletterFields",
-			});
-		}
 
 		/* Checkout related */
 		/**
