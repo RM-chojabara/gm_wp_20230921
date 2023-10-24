@@ -269,6 +269,14 @@
 								containerSelector: "#my-account"
 						});
 					}
+
+					/**
+					 * メール登録用にTPにメールアドレスを渡す
+					 */
+					const data = await auth0Client.getUser();
+					tp.userEmail = data.email;
+					// console.log('tp.userEmail', tp.userEmail);
+
 				} catch (err) {
 					console.log("err", err);
 				}
