@@ -625,8 +625,8 @@ add_action('pre_get_posts', function($query) {
         //GM Mono 349(開発環境) 2249(本番環境)
         //Rittor Music 1673(本番環境)
         $tag_slugs = array(
-          'pr', 
-          'gm-mono', 
+          'pr',
+          'gm-mono',
           'rittor-music');
         $tag_ids = array();
         foreach ( $tag_slugs as $slug ) {
@@ -638,7 +638,7 @@ add_action('pre_get_posts', function($query) {
 
     if ( $query->is_main_query() && $query->is_feed('linenews') ) {
         //特定カテゴリのみ
-        // 4 News, 8 Interview, 16 Playing, 17 Article, 
+        // 4 News, 8 Interview, 16 Playing, 17 Article,
         $query->set( 'category__in', array(4, 8, 16, 17) );
         // 指板図を除外、337(開発環境) 1730(本番環境)
         $Shibanzu_catid = get_category_by_slug( 'shibanzukun' )->cat_ID;
@@ -677,7 +677,7 @@ function remove_link_from_feed($content) {
 
 
     $content = str_replace("<p></p>", "", $content);
-    
+
     $replaceData = array(
       '/<a[^<>]*>(.*?)<\/a>/' => '<span>$1</span>',  //Aタグの削除
     );
@@ -695,7 +695,7 @@ function remove_link_from_feed($content) {
     //$pattern = '/(\n|\r|\r\n)+/us';
     //$replace = "\n";
     //$content = preg_replace($pattern, $replace, $content);
-    
+
     $replaceData = array(
       '/<h3(.*?)<\/h3>/' => '<h2$1</h2>',  //H3タグをh2にする
       '/<h4.*?>(.*?)<\/h4>/' => '<strong>$1</strong><br><br>',  //H4タグを消して改行を加える
@@ -710,4 +710,18 @@ function remove_link_from_feed($content) {
 
   return $content;
 }
+
+// メンテナンス画面をかけるための関数
+// function theme_maintenance_mode() {
+//   global $pagenow;
+//   if ( !current_user_can( 'edit_themes' ) && $pagenow !== 'wp-login.php' && !is_admin() ) {
+//     $html = '<div style="text-align: center; padding: 50px;">';
+//     $html .= '<h1>メンテナンス中です</h1>';
+//     $html .= '<p>現在ウェブサイトはメンテナンス中です。しばらくお待ちください。</p>';
+//     $html .= '</div>';
+//     wp_die($html, 'メンテナンス中');
+//   }
+// }
+// add_action('get_header', 'theme_maintenance_mode');
+
 /* DON'T DELETE THIS CLOSING TAG */ ?>
