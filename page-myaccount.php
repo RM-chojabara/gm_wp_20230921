@@ -29,7 +29,7 @@
 									<h1 class="page-title">マイページ</h1>
 
 									<button class="js-PianoLogoutBtn piano-my-page__logout-button auth-button" data-id="auth">
-										<img src="https://guitarmagazine.jp/wp-content/themes/guitarmagazine/parts/piano/img/logo-rm-id-white.svg" alt="">
+										<img src="<?php echo get_template_directory_uri(); ?>/parts/piano/img/logo-rm-id-white.svg" alt="">
 										<span>ログアウト</span>
 									</button>
 								</header>
