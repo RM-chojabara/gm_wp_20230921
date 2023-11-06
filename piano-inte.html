@@ -156,13 +156,13 @@
 					 */
 					const loginURL = window.location.origin + '/my-account/';
 
-					tp.authLogin = function () {
-						auth0Client.loginWithRedirect({
-							authorizationParams: {
-								redirect_uri: loginURL
-							}
-						});
-					}
+					// tp.authLogin = function () {
+					// 	auth0Client.loginWithRedirect({
+					// 		authorizationParams: {
+					// 			redirect_uri: loginURL
+					// 		}
+					// 	});
+					// }
 
 					loginButtons.forEach(el => el.addEventListener('click', (e) => {
 						e.preventDefault();
